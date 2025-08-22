@@ -1,0 +1,326 @@
+/* Custom Fonts */
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/Pretendard-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/Pretendard-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* Custom Styles for Gogumafarm */
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Logo Style */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-text {
+  background: #AA5BFF;
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.5px;
+}
+
+/* Navigation */
+.nav-link {
+  color: #131313;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.2s;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: #AA5BFF;
+}
+
+/* Badge Colors */
+.badge-purple {
+  background: #F3E8FF !important;
+  color: #7C3AED !important;
+  border: none !important;
+}
+
+.badge-green {
+  background: #D1FAE5 !important;
+  color: #065F46 !important;
+  border: none !important;
+}
+
+.badge-blue {
+  background: #DBEAFE !important;
+  color: #1E40AF !important;
+  border: none !important;
+}
+
+.badge-orange {
+  background: #FED7AA !important;
+  color: #C2410C !important;
+  border: none !important;
+}
+
+.badge-pink {
+  background: #FCE7F3 !important;
+  color: #BE185D !important;
+  border: none !important;
+}
+
+.badge-cyan {
+  background: #CFFAFE !important;
+  color: #0E7490 !important;
+  border: none !important;
+}
+
+/* Hero Section */
+.hero-section {
+  background: #FBFBFB;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Carousel */
+.carousel-container {
+  position: relative;
+}
+
+.carousel-nav-button {
+  background: white;
+  border: 1px solid #E5E5E5;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.carousel-nav-button:hover {
+  background: #F5F5F5;
+  transform: scale(1.1);
+}
+
+/* Top 10 Section */
+.top10-section {
+  background: #131313;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.top10-title {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.top10-subtitle {
+  color: #999;
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+.top10-divider {
+  width: 60px;
+  height: 2px;
+  background: #AA5BFF;
+  margin: 20px auto;
+}
+
+.top10-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid #333;
+  transition: all 0.3s;
+}
+
+.top10-item:hover {
+  padding-left: 10px;
+}
+
+.top10-number {
+  font-size: 28px;
+  font-weight: 800;
+  color: #666;
+  min-width: 40px;
+}
+
+.top10-title-text {
+  font-size: 18px;
+  line-height: 1.6;
+  color: white;
+  cursor: pointer;
+}
+
+.top10-title-text:hover {
+  color: #AA5BFF;
+}
+
+/* Article Cards */
+.article-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.article-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.article-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.article-content {
+  padding: 20px;
+}
+
+.article-date {
+  color: #999;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.article-title {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #131313;
+  margin-top: 12px;
+}
+
+/* News Section */
+.news-section {
+  background: white;
+  padding: 80px 0;
+  position: relative;
+}
+
+.news-sticker {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  width: 120px;
+  height: 120px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Footer */
+.footer-section {
+  background: #131313;
+  color: white;
+  padding: 60px 0 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-goguma {
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  opacity: 0.3;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 9999;
+  transition: right 0.3s;
+}
+
+.mobile-menu.open {
+  right: 0;
+}
+
+/* Hot Sticker Animation */
+.hot-sticker {
+  position: absolute;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.6s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .logo-text {
+    font-size: 16px;
+    padding: 4px 12px;
+  }
+  
+  .top10-title {
+    font-size: 24px;
+  }
+  
+  .article-title {
+    font-size: 16px;
+  }
+  
+  .top10-number {
+    font-size: 24px;
+  }
+  
+  .top10-title-text {
+    font-size: 16px;
+  }
+}

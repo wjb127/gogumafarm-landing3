@@ -10,22 +10,22 @@ export default function HomePage() {
       <header className="border-b border-gray-200 px-4 py-3">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-8">
-            <div className="flex items-center gap-2">
-              <div className="bg-black text-white px-3 py-1 rounded font-bold text-lg">고구마팜</div>
+            <div className="logo-container">
+              <div className="logo-text">고구마팜</div>
               <span className="text-sm text-gray-600">by. The SMC</span>
             </div>
             <nav className="hidden md:flex items-center gap-6">
-              <a href="#" className="text-gray-700 hover:text-black">
-                최신 밀파 트렌드
+              <a href="#" className="nav-link">
+                최신 밈과 트렌드
               </a>
-              <a href="#" className="text-gray-700 hover:text-black">
+              <a href="#" className="nav-link">
                 핵심 전략과 레퍼런스
               </a>
-              <a href="#" className="text-gray-700 hover:text-black">
+              <a href="#" className="nav-link">
                 일잘러 스킬셋
               </a>
-              <a href="#" className="text-gray-700 hover:text-black">
-                승부처
+              <a href="#" className="nav-link">
+                슴씨피드
               </a>
             </nav>
           </div>
@@ -50,9 +50,9 @@ export default function HomePage() {
             </div>
             <div>
               <div className="mb-4">
-                <Badge className="bg-purple-100 text-purple-800 mr-2">공공기관</Badge>
-                <Badge className="bg-green-100 text-green-800 mr-2">유튜브</Badge>
-                <Badge className="bg-blue-100 text-blue-800">콘텐츠</Badge>
+                <Badge className="badge-purple mr-2">공공기관</Badge>
+                <Badge className="badge-green mr-2">유튜브</Badge>
+                <Badge className="badge-blue">콘텐츠</Badge>
               </div>
               <h2 className="text-3xl font-bold mb-4">
                 유튜브 필승법 = 귀여운 동물? 공공기관도, AI 크리에이터도 써먹는 콘텐츠 치트키!
