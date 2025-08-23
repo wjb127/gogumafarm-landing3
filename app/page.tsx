@@ -252,14 +252,14 @@ export default function HomePage() {
           <motion.div variants={fadeInUp}>
             <Card className="overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer">
               <div className="relative">
-                <img src="/korean-job-ad.png" alt="인기광고 리뷰해봄" className="w-full h-48 object-cover" />
-                <div className="absolute top-2 left-2">
+                <img src="/고구마팜썸네일-0822-700x401.jpg" alt="인기광고 리뷰해봄" className="w-full h-64 object-contain bg-gray-50" />
+              </div>
+              <CardContent className="pt-2 px-4 pb-4">
+                <div className="mb-2">
                   <Badge className="bg-purple-100 text-purple-800">PPL</Badge>
                   <Badge className="bg-blue-100 text-blue-800 ml-1">광고</Badge>
                   <Badge className="bg-green-100 text-green-800 ml-1">유튜브</Badge>
                 </div>
-              </div>
-              <CardContent className="p-4">
                 <p className="text-sm text-gray-500 mb-2">2025. 08. 22</p>
                 <h3 className="font-bold">
                   이게 무전비디오야 광고야 감탄한 비즈업로 시선을 사로잡은 [7월 인기 광고 분석]
@@ -273,17 +273,17 @@ export default function HomePage() {
             <Card className="overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer">
               <div className="relative">
                 <img
-                  src="/korean-male-celebrity-glasses-orange.png"
+                  src="/고구마팜-말랭이썸네일_250821-700x400.jpg"
                   alt="페이커X영 만남"
-                  className="w-full h-48 object-cover"
+                  className="w-full h-64 object-contain bg-gray-50"
                 />
-                <div className="absolute top-2 left-2">
+              </div>
+              <CardContent className="pt-2 px-4 pb-4">
+                <div className="mb-2">
                   <Badge className="bg-blue-100 text-blue-800">광고</Badge>
                   <Badge className="bg-green-100 text-green-800 ml-1">유튜브</Badge>
                   <Badge className="bg-purple-100 text-purple-800 ml-1">캠페인</Badge>
                 </div>
-              </div>
-              <CardContent className="p-4">
                 <p className="text-sm text-gray-500 mb-2">2025. 08. 22</p>
                 <h3 className="font-bold">
                   게이머들이 뽑은 올해 최고의 광고?! 페이커X영 만남을 성사시킨 삼성 OLED 캠페인!
@@ -296,14 +296,14 @@ export default function HomePage() {
           <motion.div variants={fadeInUp}>
             <Card className="overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer">
               <div className="relative">
-                <img src="/korean-ad-analysis.png" alt="구매로 전환되는 광고" className="w-full h-48 object-cover" />
-                <div className="absolute top-2 left-2">
+                <img src="/고구마팜썸네일-0820-700x401.png" alt="구매로 전환되는 광고" className="w-full h-64 object-contain bg-gray-50" />
+              </div>
+              <CardContent className="pt-2 px-4 pb-4">
+                <div className="mb-2">
                   <Badge className="bg-orange-100 text-orange-800">SNS</Badge>
                   <Badge className="bg-blue-100 text-blue-800 ml-1">광고</Badge>
                   <Badge className="bg-green-100 text-green-800 ml-1">인터뷰</Badge>
                 </div>
-              </div>
-              <CardContent className="p-4">
                 <p className="text-sm text-gray-500 mb-2">2025. 08. 20</p>
                 <h3 className="font-bold">구매로 전환되는 광고 기획의 비결? 광고에 영업 당한 소비자에게 물어봤습니다</h3>
               </CardContent>
@@ -314,8 +314,10 @@ export default function HomePage() {
           <motion.div variants={fadeInUp}>
             <Card className="overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer">
               <div className="relative">
-                <img src="/korean-variety-show.png" alt="시니어는 콘텐츠" className="w-full h-48 object-cover" />
-                <div className="absolute top-2 left-2">
+                <img src="/고구마팜-시니어는-이렇게-삽니다_대지-1-사본-700x400.png" alt="시니어는 콘텐츠" className="w-full h-64 object-contain bg-gray-50" />
+              </div>
+              <CardContent className="pt-2 px-4 pb-4">
+                <div className="mb-2">
                   <Badge variant="secondary" className="bg-pink-100 text-pink-800">
                     시니어마케팅
                   </Badge>
@@ -326,8 +328,6 @@ export default function HomePage() {
                     트렌드
                   </Badge>
                 </div>
-              </div>
-              <CardContent className="p-4">
                 <p className="text-sm text-gray-500 mb-2">2025. 08. 19</p>
                 <h3 className="font-bold">
                   5060 연포에 이어 이젠 초고령 은둔버까지?! 시니어 마케팅 하기 전에 꼭 알아야 할 변화들
@@ -341,11 +341,13 @@ export default function HomePage() {
             <Card className="overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer">
               <div className="relative">
                 <img
-                  src="/korean-liberation-80th.png"
+                  src="/고구마팜-말랭이썸네일_250819-01-700x400.jpg"
                   alt="광복 80주년을 빛낸 캠페인"
-                  className="w-full h-48 object-cover"
+                  className="w-full h-64 object-contain bg-gray-50"
                 />
-                <div className="absolute top-2 left-2">
+              </div>
+              <CardContent className="pt-2 px-4 pb-4">
+                <div className="mb-2">
                   <Badge variant="secondary" className="bg-blue-100 text-blue-800">
                     CSR
                   </Badge>
@@ -356,8 +358,6 @@ export default function HomePage() {
                     캠페인
                   </Badge>
                 </div>
-              </div>
-              <CardContent className="p-4">
                 <p className="text-sm text-gray-500 mb-2">2025. 08. 19</p>
                 <h3 className="font-bold">시간 되살려낸 80년 전 만세 소리! 올해 광복절 캠페인이 보여준 새로운 시도</h3>
               </CardContent>
@@ -369,11 +369,13 @@ export default function HomePage() {
             <Card className="overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer">
               <div className="relative">
                 <img
-                  src="/placeholder-xxp8l.png"
+                  src="/고구마팜-말랭이썸네일_250814-700x400.png"
                   alt="나영석&김태호가 연구 패널로"
-                  className="w-full h-48 object-cover"
+                  className="w-full h-64 object-contain bg-gray-50"
                 />
-                <div className="absolute top-2 left-2">
+              </div>
+              <CardContent className="pt-2 px-4 pb-4">
+                <div className="mb-2">
                   <Badge variant="secondary" className="bg-purple-100 text-purple-800">
                     유튜브
                   </Badge>
@@ -381,8 +383,6 @@ export default function HomePage() {
                     트렌드
                   </Badge>
                 </div>
-              </div>
-              <CardContent className="p-4">
                 <p className="text-sm text-gray-500 mb-2">2025. 08. 14</p>
                 <h3 className="font-bold">나영석&김태호가 연구 패널로?! PDF파 연구 '사이딩'으로 보는 콘텐츠 인사이트</h3>
               </CardContent>
