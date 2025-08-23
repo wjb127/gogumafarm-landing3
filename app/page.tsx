@@ -18,28 +18,28 @@ export default function HomePage() {
       image: "/youtube-content-1.png",
       badges: [
         { text: "공공기관", className: "badge-purple" },
-        { text: "유튜브", className: "badge-green" },
-        { text: "콘텐츠", className: "badge-blue" }
+        { text: "유튜브", className: "badge-purple" },
+        { text: "콘텐츠", className: "badge-purple" }
       ],
       title: "유튜브 필승법 = 귀여운 동물? 공공기관도, AI 크리에이터도 써먹는 콘텐츠 치트키!"
     },
     {
       image: "/youtube-content-2.jpg",
       badges: [
-        { text: "NEW", className: "badge-purple" },
-        { text: "마케팅", className: "badge-orange" },
-        { text: "SNS", className: "badge-blue" }
+        { text: "SNS", className: "badge-purple" },
+        { text: "바이럴", className: "badge-purple" },
+        { text: "CEO", className: "badge-purple" }
       ],
-      title: "패턴 2의 제목을 입력해주세요"
+      title: "CEO가 콘텐츠 천재면 벌어지는 일? 대표가 직접 운영하는 SNS의 성공 법칙!"
     },
     {
       image: "/youtube-content-3.jpg",
       badges: [
-        { text: "트렌드", className: "badge-pink" },
-        { text: "릴스", className: "badge-green" },
-        { text: "템플릿", className: "badge-yellow" }
+        { text: "SNS", className: "badge-purple" },
+        { text: "릴스", className: "badge-purple" },
+        { text: "콘텐츠", className: "badge-purple" }
       ],
-      title: "패턴 3의 제목을 입력해주세요"
+      title: "SNS 유행 찾다 지친 콘텐츠 기획자를 위해! 인기 릴스 템플릿 전부 모아왔어요"
     }
   ]
   
