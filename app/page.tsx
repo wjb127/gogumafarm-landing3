@@ -10,6 +10,7 @@ import { ChevronLeft, ChevronRight, Search, Menu } from "lucide-react"
 export default function HomePage() {
   const [isHoveringGoguma, setIsHoveringGoguma] = useState(false)
   const [currentNewsIndex, setCurrentNewsIndex] = useState(0)
+  const [top10Page, setTop10Page] = useState(0)
   
   const newsImages = [
     "/0812.png",
@@ -43,6 +44,22 @@ export default function HomePage() {
       }
     }
   }
+
+  const top10Items: string[] = [
+    "저희는 합의 끝에 이 챌린지로 골랐습니다. 알고리즘 탑승 직행하는 인기 릴스 모음!",
+    "이건 첫 번째 레슨~ 요즘 유행하는 밈은 알고 가기! [2025년 7월 최신 밈 모음]",
+    "추성훈, 권또또, 카니··· 지금 유튜브에서 협업하기 좋은 셀럽 채널 14선!",
+    "29CM는 브랜딩, 올리브영은 콜라보? 각자 다른 마케팅으로 승부하는 플랫폼 시장!",
+    "바야흐로 생성형 AI 콘텐츠의 전성시대! 지금 주목받는 AI 활용 트렌드 살펴보기",
+    "나영석&김태호가 연프 패널로?! PD판 '사옥미팅'으로 보는 콘텐츠 인사이트",
+    "웬즈데이가 역대급 콜라보와 함께 돌아왔다! 웬디스, 치토스 사례로 보는 IP 활용 전략",
+    "2025 상반기 마케팅 트렌드·이슈 총결산! 실무자가 주목해야 할 변화는?",
+    "인기 밈 알면 하룰라라 날아서 궁전으로 갈 수도 있어~ [2025년 6월 최신 밈 모음]",
+    "여름 가고 부국제, 최강야구 온다! 9월 시즈널 이슈 담은 마케팅 캘린더 보기",
+  ]
+
+  const handleTop10Prev = () => setTop10Page((prev) => (prev - 1 + 2) % 2)
+  const handleTop10Next = () => setTop10Page((prev) => (prev + 1) % 2)
 
   return (
     <div className="min-h-screen bg-white">
@@ -175,61 +192,52 @@ export default function HomePage() {
 
           <div className="flex justify-end mb-6">
             <div className="flex gap-2">
-              <Button variant="ghost" size="sm" className="text-white hover:bg-gray-800">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="text-white hover:bg-gray-800"
+                onClick={handleTop10Prev}
+                aria-label="이전 인기 아티클"
+              >
                 <ChevronLeft className="w-4 h-4" />
               </Button>
-              <Button variant="ghost" size="sm" className="text-white hover:bg-gray-800">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="text-white hover:bg-gray-800"
+                onClick={handleTop10Next}
+                aria-label="다음 인기 아티클"
+              >
                 <ChevronRight className="w-4 h-4" />
               </Button>
             </div>
           </div>
 
-          <motion.div className="space-y-6" variants={stagger} initial="initial" whileInView="animate" viewport={{ once: true }}>
-            <motion.div 
-              className="flex items-start gap-4 pb-4 border-b border-gray-700 cursor-pointer"
-              variants={fadeInUp}
-              whileHover={{ x: 10 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <span className="text-2xl font-bold text-gray-400">1</span>
-              <p className="text-lg">저희는 함의 끝에 이 챌린지로 공짜입니다. 앞고리즘 탐승 직행하는 인기 필수 모음!</p>
-            </motion.div>
-            <motion.div 
-              className="flex items-start gap-4 pb-4 border-b border-gray-700 cursor-pointer"
-              variants={fadeInUp}
-              whileHover={{ x: 10 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <span className="text-2xl font-bold text-gray-400">2</span>
-              <p className="text-lg">이건 첫 번째 레슨~ 요즘 유행하는 맘은 알고 가기! [2025년 7월 최신 및 모음]</p>
-            </motion.div>
-            <motion.div 
-              className="flex items-start gap-4 pb-4 border-b border-gray-700 cursor-pointer"
-              variants={fadeInUp}
-              whileHover={{ x: 10 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <span className="text-2xl font-bold text-gray-400">3</span>
-              <p className="text-lg">추성훈, 김포도, 카니... 지금 유튜브에서 협업하기 좋은 셀럽 체널 14선!</p>
-            </motion.div>
-            <motion.div 
-              className="flex items-start gap-4 pb-4 border-b border-gray-700 cursor-pointer"
-              variants={fadeInUp}
-              whileHover={{ x: 10 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <span className="text-2xl font-bold text-gray-400">4</span>
-              <p className="text-lg">29C는 브랜딩, 올리브영은 클라넘? 각자 다른 마케팅으로 승부하는 플랫폼 시장!</p>
-            </motion.div>
-            <motion.div 
-              className="flex items-start gap-4 pb-4 cursor-pointer"
-              variants={fadeInUp}
-              whileHover={{ x: 10 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <span className="text-2xl font-bold text-gray-400">5</span>
-              <p className="text-lg">바야흐로 생성형 AI 콘텐츠의 전성시대! 지금 주목받는 AI 활용 트렌드 살펴보기</p>
-            </motion.div>
+          <motion.div 
+            key={top10Page}
+            className="space-y-6" 
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            transition={{ duration: 0.3 }}
+          >
+            {top10Items.slice(top10Page * 5, top10Page * 5 + 5).map((title, idx) => {
+              const itemNumber = top10Page * 5 + idx + 1
+              const isLastInGroup = idx === 4
+              return (
+                <motion.div 
+                  key={itemNumber}
+                  className={`flex items-start gap-4 pb-4 ${isLastInGroup ? '' : 'border-b border-gray-700'} cursor-pointer`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                  whileHover={{ x: 10 }}
+                >
+                  <span className="text-2xl font-bold text-gray-400">{itemNumber}</span>
+                  <p className="text-lg text-white">{title}</p>
+                </motion.div>
+              )
+            })}
           </motion.div>
         </div>
       </motion.section>
