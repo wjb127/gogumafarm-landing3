@@ -326,8 +326,8 @@ export default function HomePage() {
               <CardContent className="pt-2 px-4 pb-4">
                 <div className="mb-2">
                   <Badge className="bg-purple-100 text-purple-800">PPL</Badge>
-                  <Badge className="bg-blue-100 text-blue-800 ml-1">광고</Badge>
-                  <Badge className="bg-green-100 text-green-800 ml-1">유튜브</Badge>
+                  <Badge className="bg-purple-100 text-purple-800 ml-1">광고</Badge>
+                  <Badge className="bg-purple-100 text-purple-800 ml-1">유튜브</Badge>
                 </div>
                 <p className="text-sm text-gray-500 mb-2">2025. 08. 22</p>
                 <h3 className="font-bold">
@@ -349,8 +349,8 @@ export default function HomePage() {
               </div>
               <CardContent className="pt-2 px-4 pb-4">
                 <div className="mb-2">
-                  <Badge className="bg-blue-100 text-blue-800">광고</Badge>
-                  <Badge className="bg-green-100 text-green-800 ml-1">유튜브</Badge>
+                  <Badge className="bg-purple-100 text-purple-800">광고</Badge>
+                  <Badge className="bg-purple-100 text-purple-800 ml-1">유튜브</Badge>
                   <Badge className="bg-purple-100 text-purple-800 ml-1">캠페인</Badge>
                 </div>
                 <p className="text-sm text-gray-500 mb-2">2025. 08. 22</p>
@@ -369,9 +369,9 @@ export default function HomePage() {
               </div>
               <CardContent className="pt-2 px-4 pb-4">
                 <div className="mb-2">
-                  <Badge className="bg-orange-100 text-orange-800">SNS</Badge>
-                  <Badge className="bg-blue-100 text-blue-800 ml-1">광고</Badge>
-                  <Badge className="bg-green-100 text-green-800 ml-1">인터뷰</Badge>
+                  <Badge className="bg-purple-100 text-purple-800">SNS</Badge>
+                  <Badge className="bg-purple-100 text-purple-800 ml-1">광고</Badge>
+                  <Badge className="bg-purple-100 text-purple-800 ml-1">인터뷰</Badge>
                 </div>
                 <p className="text-sm text-gray-500 mb-2">2025. 08. 20</p>
                 <h3 className="font-bold">구매로 전환되는 광고 기획의 비결? 광고에 영업 당한 소비자에게 물어봤습니다</h3>
@@ -387,13 +387,13 @@ export default function HomePage() {
               </div>
               <CardContent className="pt-2 px-4 pb-4">
                 <div className="mb-2">
-                  <Badge variant="secondary" className="bg-pink-100 text-pink-800">
+                  <Badge variant="secondary" className="bg-purple-100 text-purple-800">
                     시니어마케팅
                   </Badge>
-                  <Badge variant="secondary" className="bg-blue-100 text-blue-800 ml-1">
+                  <Badge variant="secondary" className="bg-purple-100 text-purple-800 ml-1">
                     캠페인
                   </Badge>
-                  <Badge variant="secondary" className="bg-green-100 text-green-800 ml-1">
+                  <Badge variant="secondary" className="bg-purple-100 text-purple-800 ml-1">
                     트렌드
                   </Badge>
                 </div>
@@ -417,13 +417,13 @@ export default function HomePage() {
               </div>
               <CardContent className="pt-2 px-4 pb-4">
                 <div className="mb-2">
-                  <Badge variant="secondary" className="bg-blue-100 text-blue-800">
+                  <Badge variant="secondary" className="bg-purple-100 text-purple-800">
                     CSR
                   </Badge>
-                  <Badge variant="secondary" className="bg-pink-100 text-pink-800 ml-1">
+                  <Badge variant="secondary" className="bg-purple-100 text-purple-800 ml-1">
                     시즈널마케팅
                   </Badge>
-                  <Badge variant="secondary" className="bg-green-100 text-green-800 ml-1">
+                  <Badge variant="secondary" className="bg-purple-100 text-purple-800 ml-1">
                     캠페인
                   </Badge>
                 </div>
@@ -448,7 +448,7 @@ export default function HomePage() {
                   <Badge variant="secondary" className="bg-purple-100 text-purple-800">
                     유튜브
                   </Badge>
-                  <Badge variant="secondary" className="bg-green-100 text-green-800 ml-1">
+                  <Badge variant="secondary" className="bg-purple-100 text-purple-800 ml-1">
                     콘텐츠
                   </Badge>
                 </div>
