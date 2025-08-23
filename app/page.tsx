@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -11,6 +11,37 @@ export default function HomePage() {
   const [isHoveringGoguma, setIsHoveringGoguma] = useState(false)
   const [currentNewsIndex, setCurrentNewsIndex] = useState(0)
   const [top10Page, setTop10Page] = useState(0)
+  const [currentHeroIndex, setCurrentHeroIndex] = useState(0)
+  
+  const heroContents = [
+    {
+      image: "/youtube-content-1.png",
+      badges: [
+        { text: "공공기관", className: "badge-purple" },
+        { text: "유튜브", className: "badge-green" },
+        { text: "콘텐츠", className: "badge-blue" }
+      ],
+      title: "유튜브 필승법 = 귀여운 동물? 공공기관도, AI 크리에이터도 써먹는 콘텐츠 치트키!"
+    },
+    {
+      image: "/youtube-content-2.jpg",
+      badges: [
+        { text: "NEW", className: "badge-purple" },
+        { text: "마케팅", className: "badge-orange" },
+        { text: "SNS", className: "badge-blue" }
+      ],
+      title: "패턴 2의 제목을 입력해주세요"
+    },
+    {
+      image: "/youtube-content-3.jpg",
+      badges: [
+        { text: "트렌드", className: "badge-pink" },
+        { text: "릴스", className: "badge-green" },
+        { text: "템플릿", className: "badge-yellow" }
+      ],
+      title: "패턴 3의 제목을 입력해주세요"
+    }
+  ]
   
   const newsImages = [
     "/0812.png",
@@ -60,6 +91,18 @@ export default function HomePage() {
 
   const handleTop10Prev = () => setTop10Page((prev) => (prev - 1 + 2) % 2)
   const handleTop10Next = () => setTop10Page((prev) => (prev + 1) % 2)
+  
+  const handleHeroPrev = () => setCurrentHeroIndex((prev) => (prev - 1 + heroContents.length) % heroContents.length)
+  const handleHeroNext = () => setCurrentHeroIndex((prev) => (prev + 1) % heroContents.length)
+  
+  // Auto-rotate hero content every 5 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentHeroIndex((prev) => (prev + 1) % heroContents.length)
+    }, 5000)
+    
+    return () => clearInterval(timer)
+  }, [])
 
   return (
     <div className="min-h-screen bg-white">
@@ -122,45 +165,56 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 relative z-10 pb-20">
           <motion.div 
             className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center"
+            key={currentHeroIndex}
             initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
           >
             <motion.div
+              className="order-2 lg:order-1"
               initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
             >
-              <img src="/korean-cute-animals-youtube.png" alt="유튜브 지트키 등장" className="w-full rounded-lg shadow-xl" />
+              <img 
+                src={heroContents[currentHeroIndex].image} 
+                alt="콘텐츠" 
+                className="w-full rounded-lg shadow-xl" 
+              />
             </motion.div>
             <motion.div
+              className="order-1 lg:order-2 text-left"
               initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
             >
-              <motion.div className="mb-4" variants={stagger} initial="initial" animate="animate">
-                <motion.span variants={fadeInUp}>
-                  <Badge className="badge-purple mr-2">공공기관</Badge>
-                </motion.span>
-                <motion.span variants={fadeInUp}>
-                  <Badge className="badge-green mr-2">유튜브</Badge>
-                </motion.span>
-                <motion.span variants={fadeInUp}>
-                  <Badge className="badge-blue">콘텐츠</Badge>
-                </motion.span>
+              <motion.div 
+                className="flex gap-2 mb-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                {heroContents[currentHeroIndex].badges.map((badge, idx) => (
+                  <motion.span
+                    key={idx}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.3 + idx * 0.1 }}
+                  >
+                    <Badge className={`${badge.className} mr-2`}>{badge.text}</Badge>
+                  </motion.span>
+                ))}
               </motion.div>
               <h2 className="text-3xl font-bold mb-4">
-                유튜브 필승법 = 귀여운 동물? 공공기관도, AI 크리에이터도 써먹는 콘텐츠 치트키!
+                {heroContents[currentHeroIndex].title}
               </h2>
               <div className="flex justify-end">
                 <div className="flex gap-2">
-                  <Button variant="ghost" size="sm">
+                  <Button variant="ghost" size="sm" onClick={handleHeroPrev}>
                     <ChevronLeft className="w-4 h-4" />
                   </Button>
-                  <Button variant="ghost" size="sm">
+                  <Button variant="ghost" size="sm" onClick={handleHeroNext}>
                     <ChevronRight className="w-4 h-4" />
                   </Button>
                 </div>
