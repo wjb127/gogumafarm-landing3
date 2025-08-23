@@ -111,8 +111,15 @@ export default function HomePage() {
       </motion.header>
 
       {/* YouTube Content Section */}
-      <section className="bg-gray-50 py-16 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="relative bg-gray-50 pt-24 pb-56 overflow-hidden">
+        <div className="absolute bottom-0 left-0 right-0 w-full z-0">
+          <img 
+            src="/hero-bottom-bg.png" 
+            alt="" 
+            className="w-full h-auto"
+          />
+        </div>
+        <div className="max-w-7xl mx-auto px-4 relative z-10 pb-20">
           <motion.div 
             className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center"
             initial={{ opacity: 0 }}
