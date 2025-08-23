@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -7,6 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { ChevronLeft, ChevronRight, Search, Menu } from "lucide-react"
 
 export default function HomePage() {
+  const [isHoveringGoguma, setIsHoveringGoguma] = useState(false)
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -484,7 +486,19 @@ export default function HomePage() {
         viewport={{ once: true }}
       >
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <img src="/sweet-potato-illustration.png" alt="고구마" className="mx-auto mb-8" />
+          <motion.div 
+            className="mx-auto mb-8 cursor-pointer w-72 h-72 relative"
+            onMouseEnter={() => setIsHoveringGoguma(true)}
+            onMouseLeave={() => setIsHoveringGoguma(false)}
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <img 
+              src={isHoveringGoguma ? "/broken-goguma.webp" : "/footer-goguma.webp"} 
+              alt="고구마" 
+              className="w-full h-full object-contain"
+            />
+          </motion.div>
         </div>
 
         {/* Footer Info */}
