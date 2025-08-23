@@ -262,7 +262,7 @@ export default function HomePage() {
                 </div>
                 <p className="text-sm text-gray-500 mb-2">2025. 08. 22</p>
                 <h3 className="font-bold">
-                  이게 무전비디오야 광고야 감탄한 비즈업로 시선을 사로잡은 [7월 인기 광고 분석]
+                  이게 뮤직비디오야 광고야? 강렬한 비주얼로 시선을 사로잡은 [7월 인기 광고 분석]
                 </h3>
               </CardContent>
             </Card>
@@ -286,7 +286,7 @@ export default function HomePage() {
                 </div>
                 <p className="text-sm text-gray-500 mb-2">2025. 08. 22</p>
                 <h3 className="font-bold">
-                  게이머들이 뽑은 올해 최고의 광고?! 페이커X영 만남을 성사시킨 삼성 OLED 캠페인!
+                  게이머들이 뽑은 올해 최고의 광고?! 페이커X윙 만남을 성사시킨 삼성 OLED 캠페인!
                 </h3>
               </CardContent>
             </Card>
@@ -330,7 +330,7 @@ export default function HomePage() {
                 </div>
                 <p className="text-sm text-gray-500 mb-2">2025. 08. 19</p>
                 <h3 className="font-bold">
-                  5060 연포에 이어 이젠 초고령 은둔버까지?! 시니어 마케팅 하기 전에 꼭 알아야 할 변화들
+                  5060 연프에 이어 이젠 초고령 유튜버까지?! 시니어 마케팅 하기 전에 꼭 알아야 할 변화들
                 </h3>
               </CardContent>
             </Card>
@@ -352,14 +352,14 @@ export default function HomePage() {
                     CSR
                   </Badge>
                   <Badge variant="secondary" className="bg-pink-100 text-pink-800 ml-1">
-                    시즌마케팅
+                    시즈널마케팅
                   </Badge>
                   <Badge variant="secondary" className="bg-green-100 text-green-800 ml-1">
                     캠페인
                   </Badge>
                 </div>
                 <p className="text-sm text-gray-500 mb-2">2025. 08. 19</p>
-                <h3 className="font-bold">시간 되살려낸 80년 전 만세 소리! 올해 광복절 캠페인이 보여준 새로운 시도</h3>
+                <h3 className="font-bold">AI가 되살려낸 80년 전 만세 소리! 올해 광복절 캠페인이 보여준 새로운 시도</h3>
               </CardContent>
             </Card>
           </motion.div>
@@ -380,11 +380,11 @@ export default function HomePage() {
                     유튜브
                   </Badge>
                   <Badge variant="secondary" className="bg-green-100 text-green-800 ml-1">
-                    트렌드
+                    콘텐츠
                   </Badge>
                 </div>
                 <p className="text-sm text-gray-500 mb-2">2025. 08. 14</p>
-                <h3 className="font-bold">나영석&김태호가 연구 패널로?! PDF파 연구 '사이딩'으로 보는 콘텐츠 인사이트</h3>
+                <h3 className="font-bold">나영석&김태호가 연프 패널로?! PD판 연프 '사옥미팅'으로 보는 콘텐츠 인사이트</h3>
               </CardContent>
             </Card>
           </motion.div>
