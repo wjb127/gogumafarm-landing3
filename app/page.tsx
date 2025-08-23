@@ -9,6 +9,27 @@ import { ChevronLeft, ChevronRight, Search, Menu } from "lucide-react"
 
 export default function HomePage() {
   const [isHoveringGoguma, setIsHoveringGoguma] = useState(false)
+  const [currentNewsIndex, setCurrentNewsIndex] = useState(0)
+  
+  const newsImages = [
+    "/0812.png",
+    "/0813_new.png",
+    "/0814.png",
+    "/0818.png",
+    "/0819.png",
+    "/0820.png",
+    "/0821.png",
+    "/0822.png"
+  ]
+
+  const handlePrevNews = () => {
+    setCurrentNewsIndex((prev) => (prev - 1 + newsImages.length) % newsImages.length)
+  }
+
+  const handleNextNews = () => {
+    setCurrentNewsIndex((prev) => (prev + 1) % newsImages.length)
+  }
+
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -39,8 +60,11 @@ export default function HomePage() {
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <div className="logo-text">고구마팜</div>
-              <span className="text-sm text-gray-600">by. The SMC</span>
+              <img 
+                src="/logo-1.svg" 
+                alt="고구마팜 by. The SMC" 
+                className="h-10"
+              />
             </motion.div>
             <nav className="hidden md:flex items-center gap-6">
               <a href="#" className="nav-link">
@@ -395,84 +419,72 @@ export default function HomePage() {
               </p>
               <div className="border-b border-gray-300 mb-8"></div>
               <div className="flex gap-2">
-                <Button variant="ghost" size="sm" className="rounded-full bg-gray-100">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="rounded-full bg-gray-100"
+                  onClick={handlePrevNews}
+                >
                   <ChevronLeft className="w-4 h-4" />
                 </Button>
-                <Button variant="ghost" size="sm" className="rounded-full bg-gray-100">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="rounded-full bg-gray-100"
+                  onClick={handleNextNews}
+                >
                   <ChevronRight className="w-4 h-4" />
                 </Button>
               </div>
             </div>
 
-            {/* Right side - News cards */}
-            <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* First news card with READ NOW sticker */}
+            {/* Right side - News images */}
+            <div className="lg:col-span-8 relative">
+              {/* READ NOW 스티커 이미지 */}
               <motion.div 
-                className="relative"
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                className="absolute -top-8 -left-20 z-20"
+                animate={{ 
+                  rotate: [0, -5, 5, -5, 0],
+                  scale: [1, 1.05, 1, 1.05, 1]
+                }}
+                transition={{ 
+                  duration: 3,
+                  repeat: Infinity,
+                  repeatType: "loop"
+                }}
               >
-                <motion.div 
-                  className="absolute -top-2 -left-2 z-10"
-                  animate={{ rotate: [-12, -15, -12] }}
-                  transition={{ repeat: Infinity, duration: 2 }}
-                >
-                  <div className="bg-yellow-400 text-black px-3 py-1 rounded-full font-bold text-sm">
-                    READ NOW!
-                  </div>
-                </motion.div>
-                <Card className="overflow-hidden border-2 border-blue-500">
-                  <div className="bg-white p-2">
-                    <div className="bg-gray-100 h-16 rounded mb-3"></div>
-                  </div>
-                  <div className="bg-blue-500 p-4 text-white">
-                    <div className="flex justify-between items-start mb-3">
-                      <div>
-                        <Badge className="bg-white text-blue-500 text-xs mb-2">COMMERCE TREND</Badge>
-                        <p className="text-sm opacity-90">2025년 8월 22일</p>
-                      </div>
-                      <div className="flex gap-1">
-                        <Badge className="bg-blue-600 text-white text-xs">NEWS</Badge>
-                        <Badge className="bg-blue-600 text-white text-xs">TREND</Badge>
-                      </div>
-                    </div>
-                    <h3 className="font-bold text-lg leading-tight">
-                      구글 스마트폰
-                      <br />
-                      '픽셀 10' 라인업 발표
-                    </h3>
-                  </div>
-                </Card>
+                <img 
+                  src="/read-now.webp" 
+                  alt="READ NOW" 
+                  className="w-24 h-24 md:w-32 md:h-32"
+                />
               </motion.div>
-
-              {/* Second news card */}
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <Card className="overflow-hidden border-2 border-pink-500">
-                  <div className="bg-white p-2">
-                    <div className="bg-gray-100 h-16 rounded mb-3"></div>
-                  </div>
-                  <div className="bg-pink-500 p-4 text-white">
-                    <div className="flex justify-between items-start mb-3">
-                      <div>
-                        <Badge className="bg-white text-pink-500 text-xs mb-2">VIDEO/CAMPAIGN TREND</Badge>
-                        <p className="text-sm opacity-90">2025년 8월 21일</p>
-                      </div>
-                      <div className="flex gap-1">
-                        <Badge className="bg-pink-600 text-white text-xs">NEWS</Badge>
-                        <Badge className="bg-pink-600 text-white text-xs">TREND</Badge>
-                      </div>
-                    </div>
-                    <h3 className="font-bold text-lg leading-tight">
-                      카카오톡, 다음달부터
-                      <br />
-                      '친구' 탭 인스타그램처럼 개편
-                    </h3>
-                  </div>
-                </Card>
-              </motion.div>
+              
+              <div className="grid grid-cols-2 gap-6">
+                {[0, 1].map((offset) => {
+                  const imageIndex = (currentNewsIndex + offset) % newsImages.length;
+                  return (
+                    <motion.div
+                      key={`${imageIndex}-${currentNewsIndex}`}
+                      initial={{ opacity: 0, x: 100 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -100 }}
+                      transition={{ 
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 30
+                      }}
+                      className="relative"
+                    >
+                      <img 
+                        src={newsImages[imageIndex]} 
+                        alt={`뉴스 ${imageIndex + 1}`}
+                        className="w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+                      />
+                    </motion.div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
@@ -480,14 +492,14 @@ export default function HomePage() {
 
       {/* Footer */}
       <motion.footer 
-        className="bg-yellow-300 py-16 relative"
+        className="bg-yellow-300 py-8 relative"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
       >
         <div className="max-w-7xl mx-auto px-4 text-center">
           <motion.div 
-            className="mx-auto mb-8 cursor-pointer w-72 h-72 relative"
+            className="mx-auto mb-4 cursor-pointer w-72 h-72 relative"
             onMouseEnter={() => setIsHoveringGoguma(true)}
             onMouseLeave={() => setIsHoveringGoguma(false)}
             whileHover={{ scale: 1.05 }}
