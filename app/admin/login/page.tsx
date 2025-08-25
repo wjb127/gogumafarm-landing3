@@ -39,7 +39,8 @@ export default function AdminLoginPage() {
       if (response.ok) {
         toast.success("로그인 성공!")
         setTimeout(() => {
-          router.push("/admin/dashboard")
+          router.refresh()
+          window.location.href = "/admin/dashboard"
         }, 500)
       } else {
         toast.error(data.error || "로그인 실패")
