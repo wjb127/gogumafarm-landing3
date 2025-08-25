@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -529,30 +529,33 @@ export default function HomePage() {
                 />
               </motion.div>
               
-              <div className="grid grid-cols-2 gap-6">
-                {[0, 1].map((offset) => {
-                  const imageIndex = (currentNewsIndex + offset) % newsImages.length;
-                  return (
-                    <motion.div
-                      key={`${imageIndex}-${currentNewsIndex}`}
-                      initial={{ opacity: 0, x: 100 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -100 }}
-                      transition={{ 
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 30
-                      }}
-                      className="relative"
-                    >
-                      <img 
-                        src={newsImages[imageIndex]} 
-                        alt={`뉴스 ${imageIndex + 1}`}
-                        className="w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
-                      />
-                    </motion.div>
-                  );
-                })}
+              <div className="relative overflow-hidden">
+                <AnimatePresence mode="wait">
+                  <motion.div 
+                    key={currentNewsIndex}
+                    className="grid grid-cols-2 gap-6"
+                    initial={{ x: 300, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    exit={{ x: -300, opacity: 0 }}
+                    transition={{
+                      x: { type: "spring", stiffness: 200, damping: 25 },
+                      opacity: { duration: 0.3 }
+                    }}
+                  >
+                    {[0, 1].map((offset) => {
+                      const imageIndex = (currentNewsIndex + offset) % newsImages.length;
+                      return (
+                        <div key={offset} className="relative">
+                          <img 
+                            src={newsImages[imageIndex]} 
+                            alt={`뉴스 ${imageIndex + 1}`}
+                            className="w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+                          />
+                        </div>
+                      );
+                    })}
+                  </motion.div>
+                </AnimatePresence>
               </div>
             </div>
           </div>
