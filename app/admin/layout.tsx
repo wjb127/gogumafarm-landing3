@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useRouter, usePathname } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { 
@@ -16,11 +16,10 @@ import {
   X,
   ChevronRight
 } from "lucide-react"
-import toast, { Toaster } from "react-hot-toast"
 import Link from "next/link"
 
 const menuItems = [
-  { href: "/admin/dashboard", label: "대시보드", icon: Home },
+  { href: "/admin", label: "대시보드", icon: Home },
   { href: "/admin/hero", label: "메인 캐러셀", icon: Image },
   { href: "/admin/articles", label: "아티클 관리", icon: FileText },
   { href: "/admin/news", label: "뉴스클리핑", icon: Newspaper },
@@ -35,13 +34,7 @@ export default function AdminLayout({
 }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
   const [isMobile, setIsMobile] = useState(false)
-  const router = useRouter()
   const pathname = usePathname()
-
-  // 로그인 페이지는 레이아웃 적용 안함
-  if (pathname === "/admin/login") {
-    return <>{children}</>
-  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -56,20 +49,16 @@ export default function AdminLayout({
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
-  const handleLogout = async () => {
-    try {
-      await fetch("/api/admin/auth/logout", { method: "POST" })
-      toast.success("로그아웃 되었습니다")
-      router.push("/admin/login")
-    } catch (error) {
-      toast.error("로그아웃 실패")
-    }
+  const handleLogout = () => {
+    // 페이지 새로고침하면 로그아웃됨
+    window.location.reload()
   }
 
+  // /admin 페이지에서 인증되지 않은 경우 레이아웃 렌더링하지 않음
+  // (페이지 자체에서 처리)
+  
   return (
     <div className="min-h-screen bg-gray-50">
-      <Toaster position="top-center" />
-      
       {/* Header */}
       <header className="bg-white border-b border-gray-200 fixed top-0 left-0 right-0 z-40">
         <div className="flex items-center justify-between px-4 h-16">
@@ -80,7 +69,7 @@ export default function AdminLayout({
             >
               {isSidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
-            <Link href="/admin/dashboard" className="flex items-center gap-2">
+            <Link href="/admin" className="flex items-center gap-2">
               <div className="bg-purple-600 text-white px-3 py-1 rounded-lg font-bold">
                 고구마팜
               </div>
