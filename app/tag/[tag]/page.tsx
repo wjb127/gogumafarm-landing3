@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, Calendar, Tag, ChevronRight } from "lucide-react"
 import { supabase } from "@/lib/supabase"
+import { incrementTagView } from "@/lib/analytics"
 import Link from "next/link"
 
 interface Article {
@@ -30,6 +31,8 @@ export default function TagPage() {
 
   useEffect(() => {
     fetchArticlesByTag()
+    // 태그 페이지 조회수 기록
+    incrementTagView(tag)
   }, [tag])
 
   const fetchArticlesByTag = async () => {

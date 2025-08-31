@@ -14,12 +14,14 @@ import {
   LogOut,
   Menu,
   X,
-  ChevronRight
+  ChevronRight,
+  BarChart3
 } from "lucide-react"
 import Link from "next/link"
 
 const menuItems = [
   { href: "/admin", label: "대시보드", icon: Home },
+  { href: "/admin/analytics", label: "방문자 통계", icon: BarChart3 },
   { href: "/admin/hero", label: "메인 캐러셀", icon: Image },
   { href: "/admin/articles", label: "아티클 관리", icon: FileText },
   { href: "/admin/news", label: "뉴스클리핑", icon: Newspaper },

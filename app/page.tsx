@@ -5,15 +5,17 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ChevronLeft, ChevronRight, Search, Menu } from "lucide-react"
+import { ChevronLeft, ChevronRight, Search, Menu, X } from "lucide-react"
 import Link from "next/link"
 import { supabase } from "@/lib/supabase"
+import { trackPageView } from "@/lib/analytics"
 
 export default function HomePage() {
   const [isHoveringGoguma, setIsHoveringGoguma] = useState(false)
   const [currentNewsIndex, setCurrentNewsIndex] = useState(0)
   const [top10Page, setTop10Page] = useState(0)
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   
   // DB에서 가져올 데이터 state
   const [heroContents, setHeroContents] = useState<any[]>([])
@@ -23,9 +25,11 @@ export default function HomePage() {
   const [siteSettings, setSiteSettings] = useState<any>({})
   const [loading, setLoading] = useState(true)
 
-  // 데이터 가져오기
+  // 데이터 가져오기 및 페이지뷰 트래킹
   useEffect(() => {
     fetchAllData()
+    // 홈페이지 조회수 기록
+    trackPageView('home')
   }, [])
 
   const fetchAllData = async () => {
@@ -223,7 +227,7 @@ export default function HomePage() {
         className="border-b border-gray-200 px-4 py-3 sticky top-0 bg-white z-50"
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-4 md:gap-8">
             <motion.div 
               className="logo-container"
               whileHover={{ scale: 1.05 }}
@@ -232,7 +236,7 @@ export default function HomePage() {
               <img 
                 src={getImageUrl(siteSettings.logo_url) || "/logo-1.svg"} 
                 alt={siteSettings.site_title || "고구마팜 by. The SMC"} 
-                className="h-10"
+                className="h-8 md:h-10"
               />
             </motion.div>
             <nav className="hidden md:flex items-center gap-6">
@@ -245,21 +249,68 @@ export default function HomePage() {
               <a href="#" className="nav-link">
                 {siteSettings.nav_link_3 || "일잘러 스킬셋"}
               </a>
-              <a href="#" className="nav-link">
-                {siteSettings.nav_link_4 || "슴씨피드"}
-              </a>
             </nav>
           </div>
-          <div className="flex items-center gap-4">
+          
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center gap-4">
             <a href="#" className="text-gray-700 hover:text-black">
               {siteSettings.header_cta_1 || "문의하기"}
             </a>
             <a href="#" className="text-gray-700 hover:text-black">
               {siteSettings.header_cta_2 || "뉴스레터 구독하기"}
             </a>
-            <Search className="w-5 h-5 text-gray-600" />
+            <Search className="w-5 h-5 text-gray-600 cursor-pointer" />
           </div>
+          
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+          >
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
+        
+        {/* Mobile Menu Dropdown */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden border-t border-gray-200 mt-3"
+            >
+              <nav className="flex flex-col py-4 px-4 space-y-3">
+                <a href="#" className="text-gray-700 hover:text-black hover:bg-gray-50 px-3 py-2 rounded transition-colors">
+                  {siteSettings.nav_link_1 || "최신 밈과 트렌드"}
+                </a>
+                <a href="#" className="text-gray-700 hover:text-black hover:bg-gray-50 px-3 py-2 rounded transition-colors">
+                  {siteSettings.nav_link_2 || "핵심 전략과 레퍼런스"}
+                </a>
+                <a href="#" className="text-gray-700 hover:text-black hover:bg-gray-50 px-3 py-2 rounded transition-colors">
+                  {siteSettings.nav_link_3 || "일잘러 스킬셋"}
+                </a>
+                <div className="border-t pt-3 mt-3 space-y-3">
+                  <a href="#" className="text-gray-700 hover:text-black hover:bg-gray-50 px-3 py-2 rounded transition-colors block">
+                    {siteSettings.header_cta_1 || "문의하기"}
+                  </a>
+                  <a href="#" className="text-gray-700 hover:text-black hover:bg-gray-50 px-3 py-2 rounded transition-colors block">
+                    {siteSettings.header_cta_2 || "뉴스레터 구독하기"}
+                  </a>
+                  <div className="flex items-center gap-2 px-3 py-2">
+                    <Search className="w-5 h-5 text-gray-600" />
+                    <span className="text-gray-600">검색</span>
+                  </div>
+                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-black hover:bg-gray-50 px-3 py-2 rounded transition-colors block">
+                    📷 인스타그램
+                  </a>
+                </div>
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.header>
 
       {/* Hero Section - DB 기반 */}
@@ -318,7 +369,7 @@ export default function HomePage() {
                     ))}
                   </motion.div>
                 )}
-                <h2 className="text-3xl font-bold mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
                   {heroContents[currentHeroIndex].title}
                 </h2>
                 {heroContents[currentHeroIndex].subtitle && (
@@ -448,10 +499,10 @@ export default function HomePage() {
           >
             {articles.map((article) => (
               <motion.div key={article.id} variants={fadeInUp}>
-                <Card 
-                  className="overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
-                  onClick={() => article.link_url && window.open(article.link_url, '_blank')}
-                >
+                <Link href={`/article/${article.id}`}>
+                  <Card 
+                    className="overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+                  >
                   <div className="relative">
                     <img 
                       src={getImageUrl(article.image_url)} 
@@ -488,7 +539,8 @@ export default function HomePage() {
                       <p className="text-sm text-gray-600 mt-2">{article.description}</p>
                     )}
                   </CardContent>
-                </Card>
+                  </Card>
+                </Link>
               </motion.div>
             ))}
           </motion.div>
@@ -516,10 +568,10 @@ export default function HomePage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               {/* Left side - Title and description */}
               <div className="lg:col-span-4">
-                <h2 className="text-3xl font-bold mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
                   {siteSettings.news_title || "뉴스클리핑"}
                 </h2>
-                <p className="text-gray-600 mb-8">
+                <p className="text-sm md:text-base text-gray-600 mb-6 md:mb-8">
                   {siteSettings.news_subtitle || "방금 업데이트된 뉴미디어 소식,\n여기 다 있어요"}
                 </p>
                 <div className="border-b border-gray-300 mb-8"></div>
@@ -547,7 +599,7 @@ export default function HomePage() {
               <div className="lg:col-span-8 relative">
                 {/* READ NOW 스티커 이미지 */}
                 <motion.div 
-                  className="absolute -top-8 -left-20 z-20"
+                  className="absolute -top-4 md:-top-8 -left-10 md:-left-20 z-20">
                   animate={{ 
                     rotate: [0, -5, 5, -5, 0],
                     scale: [1, 1.05, 1, 1.05, 1]
@@ -561,7 +613,7 @@ export default function HomePage() {
                   <img 
                     src="https://bzzjkcrbwwrqlumxigag.supabase.co/storage/v1/object/public/post-images/misc/read-now.webp" 
                     alt="READ NOW" 
-                    className="w-24 h-24 md:w-32 md:h-32"
+                    className="w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32"
                   />
                 </motion.div>
                 
@@ -569,7 +621,7 @@ export default function HomePage() {
                   <AnimatePresence mode="wait">
                     <motion.div 
                       key={currentNewsIndex}
-                      className="grid grid-cols-2 gap-6"
+                      className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6"
                       initial={{ x: 300, opacity: 0 }}
                       animate={{ x: 0, opacity: 1 }}
                       exit={{ x: -300, opacity: 0 }}
@@ -586,7 +638,7 @@ export default function HomePage() {
                             <img 
                               src={getImageUrl(news.image_url)} 
                               alt={news.title || `뉴스 ${imageIndex + 1}`}
-                              className="w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+                              className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
                               onClick={() => news.link_url && window.open(news.link_url, '_blank')}
                             />
                           </div>
