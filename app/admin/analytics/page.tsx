@@ -70,11 +70,15 @@ export default function AnalyticsPage() {
       setPopularTags(tags)
       
       // 최근 조회 기록
-      const { data: views } = await supabase
+      const { data: views, error: viewsError } = await supabase
         .from('kmong_12_page_views')
         .select('*')
         .order('created_at', { ascending: false })
         .limit(10)
+      
+      if (viewsError && viewsError.code !== 'PGRST116') {
+        console.error('Error fetching recent views:', viewsError)
+      }
       
       if (views) {
         setRecentViews(views)

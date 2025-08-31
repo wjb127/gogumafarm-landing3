@@ -29,9 +29,13 @@ export async function trackPageView(
   pageType: 'home' | 'article' | 'tag' | 'admin',
   pageId?: string
 ) {
+  if (typeof window === 'undefined') return
+  
   try {
     const visitorId = getVisitorId()
     const sessionId = getSessionId()
+    
+    if (!visitorId || !sessionId) return
     
     // 페이지 조회 기록
     const { error } = await supabase
@@ -41,8 +45,8 @@ export async function trackPageView(
         page_id: pageId,
         visitor_id: visitorId,
         session_id: sessionId,
-        user_agent: navigator.userAgent,
-        referrer: document.referrer
+        user_agent: navigator?.userAgent || '',
+        referrer: document?.referrer || ''
       })
     
     if (error) {
@@ -58,8 +62,11 @@ export async function trackPageView(
 
 // 활성 방문자 업데이트
 async function updateActiveVisitor(pageType: string, pageId?: string) {
+  if (typeof window === 'undefined') return
+  
   try {
     const visitorId = getVisitorId()
+    if (!visitorId) return
     
     const { error } = await supabase
       .from('kmong_12_active_visitors')
@@ -68,7 +75,7 @@ async function updateActiveVisitor(pageType: string, pageId?: string) {
         page_type: pageType,
         page_id: pageId,
         last_activity: new Date().toISOString(),
-        user_agent: navigator.userAgent
+        user_agent: navigator?.userAgent || ''
       }, {
         onConflict: 'visitor_id'
       })
@@ -129,29 +136,45 @@ export async function getVisitorStats() {
     const today = new Date().toISOString().split('T')[0]
     
     // 오늘의 통계
-    const { data: todayStats } = await supabase
+    const { data: todayStats, error: statsError } = await supabase
       .from('kmong_12_daily_stats')
       .select('*')
       .eq('date', today)
       .single()
     
+    if (statsError && statsError.code !== 'PGRST116') {
+      console.error('Error fetching daily stats:', statsError)
+    }
+    
     // 활성 방문자 수 (최근 5분)
     const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000).toISOString()
-    const { count: activeVisitors } = await supabase
+    const { count: activeVisitors, error: activeError } = await supabase
       .from('kmong_12_active_visitors')
       .select('*', { count: 'exact', head: true })
       .gte('last_activity', fiveMinutesAgo)
     
+    if (activeError && activeError.code !== 'PGRST116') {
+      console.error('Error fetching active visitors:', activeError)
+    }
+    
     // 전체 조회수
-    const { count: totalViews } = await supabase
+    const { count: totalViews, error: totalError } = await supabase
       .from('kmong_12_page_views')
       .select('*', { count: 'exact', head: true })
     
+    if (totalError && totalError.code !== 'PGRST116') {
+      console.error('Error fetching total views:', totalError)
+    }
+    
     // 오늘 조회수
-    const { count: todayViews } = await supabase
+    const { count: todayViews, error: todayError } = await supabase
       .from('kmong_12_page_views')
       .select('*', { count: 'exact', head: true })
       .gte('created_at', `${today}T00:00:00`)
+    
+    if (todayError && todayError.code !== 'PGRST116') {
+      console.error('Error fetching today views:', todayError)
+    }
     
     return {
       activeVisitors: activeVisitors || 0,
@@ -173,13 +196,17 @@ export async function getVisitorStats() {
 // 인기 아티클 가져오기
 export async function getPopularArticles(limit = 10) {
   try {
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('kmong_12_articles')
       .select('*, kmong_12_article_stats(view_count)')
       .eq('is_active', true)
-      .order('view_count', { ascending: false })
       .limit(limit)
     
+    if (error && error.code !== 'PGRST116') {
+      console.error('Error getting popular articles:', error)
+    }
+    
+    // article_stats가 없어도 기본 아티클은 보여주기
     return data || []
   } catch (error) {
     console.error('Error getting popular articles:', error)
@@ -190,11 +217,15 @@ export async function getPopularArticles(limit = 10) {
 // 인기 태그 가져오기
 export async function getPopularTags(limit = 10) {
   try {
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('kmong_12_tag_stats')
       .select('*')
       .order('view_count', { ascending: false })
       .limit(limit)
+    
+    if (error && error.code !== 'PGRST116') {
+      console.error('Error getting popular tags:', error)
+    }
     
     return data || []
   } catch (error) {
