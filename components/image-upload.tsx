@@ -38,7 +38,7 @@ export function ImageUpload({
 
       // 파일 업로드
       const { data, error: uploadError } = await supabase.storage
-        .from('images')
+        .from('post-images')
         .upload(fileName, file, {
           cacheControl: '3600',
           upsert: false
@@ -50,7 +50,7 @@ export function ImageUpload({
 
       // 공개 URL 가져오기
       const { data: { publicUrl } } = supabase.storage
-        .from('images')
+        .from('post-images')
         .getPublicUrl(fileName)
 
       setPreview(publicUrl)
