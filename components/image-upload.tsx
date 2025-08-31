@@ -23,6 +23,16 @@ export function ImageUpload({
   const [uploading, setUploading] = useState(false)
   const [preview, setPreview] = useState(value || '')
   const fileInputRef = useRef<HTMLInputElement>(null)
+  
+  // 이미지 URL에 타임스탬프 추가 (캐시 방지)
+  const getImageUrlWithTimestamp = (url: string) => {
+    if (!url) return ''
+    if (url.includes('supabase.co/storage')) {
+      const separator = url.includes('?') ? '&' : '?'
+      return `${url}${separator}t=${Date.now()}`
+    }
+    return url
+  }
 
   const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
@@ -140,7 +150,7 @@ export function ImageUpload({
       {preview && (
         <div className="relative w-full max-w-md">
           <img
-            src={preview}
+            src={getImageUrlWithTimestamp(preview)}
             alt="미리보기"
             className="w-full h-48 object-cover rounded-lg border"
             onError={(e) => {

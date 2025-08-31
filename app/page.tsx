@@ -157,6 +157,17 @@ export default function HomePage() {
     )
   }
 
+  // 이미지 URL에 타임스탬프 추가 (캐시 버스팅)
+  const getImageUrl = (url: string) => {
+    if (!url) return ''
+    // Supabase Storage URL인 경우 타임스탬프 추가
+    if (url.includes('supabase.co/storage')) {
+      const separator = url.includes('?') ? '&' : '?'
+      return `${url}${separator}t=${Date.now()}`
+    }
+    return url
+  }
+
   // Badge 타입에 따른 색상 매핑
   const getBadgeClassName = (type: string) => {
     switch(type) {
@@ -194,7 +205,7 @@ export default function HomePage() {
               transition={{ type: "spring", stiffness: 300 }}
             >
               <img 
-                src={siteSettings.logo_url || "/logo-1.svg"} 
+                src={getImageUrl(siteSettings.logo_url) || "/logo-1.svg"} 
                 alt={siteSettings.site_title || "고구마팜 by. The SMC"} 
                 className="h-10"
               />
@@ -252,7 +263,7 @@ export default function HomePage() {
                 transition={{ duration: 0.6 }}
               >
                 <img 
-                  src={heroContents[currentHeroIndex].image_url} 
+                  src={getImageUrl(heroContents[currentHeroIndex].image_url)} 
                   alt={heroContents[currentHeroIndex].title} 
                   className="w-full rounded-lg shadow-xl" 
                 />
@@ -418,7 +429,7 @@ export default function HomePage() {
                 >
                   <div className="relative">
                     <img 
-                      src={article.image_url} 
+                      src={getImageUrl(article.image_url)} 
                       alt={article.title} 
                       className="w-full h-64 object-cover"
                     />
@@ -544,7 +555,7 @@ export default function HomePage() {
                         return (
                           <div key={offset} className="relative">
                             <img 
-                              src={news.image_url} 
+                              src={getImageUrl(news.image_url)} 
                               alt={news.title || `뉴스 ${imageIndex + 1}`}
                               className="w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
                               onClick={() => news.link_url && window.open(news.link_url, '_blank')}
