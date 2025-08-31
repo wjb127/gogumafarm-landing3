@@ -599,7 +599,7 @@ export default function HomePage() {
               <div className="lg:col-span-8 relative">
                 {/* READ NOW 스티커 이미지 */}
                 <motion.div 
-                  className="absolute -top-4 md:-top-8 -left-10 md:-left-20 z-20">
+                  className="absolute -top-4 md:-top-8 -left-10 md:-left-20 z-20"
                   animate={{ 
                     rotate: [0, -5, 5, -5, 0],
                     scale: [1, 1.05, 1, 1.05, 1]
