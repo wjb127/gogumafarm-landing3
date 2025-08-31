@@ -9,6 +9,7 @@ import { Switch } from "@/components/ui/switch"
 import { Plus, Trash2, Edit2, Save, X, ArrowUp, ArrowDown } from "lucide-react"
 import { supabase } from "@/lib/supabase"
 import { motion, AnimatePresence } from "framer-motion"
+import { ImageUpload } from "@/components/image-upload"
 
 interface HeroContent {
   id: string
@@ -175,11 +176,11 @@ export default function HeroManagementPage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <Label>이미지 URL</Label>
-                  <Input 
-                    placeholder="/youtube-content-1.png"
+                  <ImageUpload
+                    label="이미지"
                     value={newForm.image}
-                    onChange={(e) => setNewForm({ ...newForm, image: e.target.value })}
+                    onChange={(url) => setNewForm({ ...newForm, image: url })}
+                    folder="hero"
                   />
                 </div>
                 <div>
@@ -229,10 +230,11 @@ export default function HeroManagementPage() {
               {editingId === content.id ? (
                 <div className="space-y-4">
                   <div>
-                    <Label>이미지 URL</Label>
-                    <Input 
+                    <ImageUpload
+                      label="이미지"
                       value={editForm.image}
-                      onChange={(e) => setEditForm({ ...editForm, image: e.target.value })}
+                      onChange={(url) => setEditForm({ ...editForm, image: url })}
+                      folder="hero"
                     />
                   </div>
                   <div>
