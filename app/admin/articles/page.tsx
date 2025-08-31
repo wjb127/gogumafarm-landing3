@@ -7,10 +7,11 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
-import { Plus, Trash2, Edit2, Save, X } from "lucide-react"
+import { Plus, Trash2, Edit2, Save, X, FileJson } from "lucide-react"
 import { supabase } from "@/lib/supabase"
 import { motion, AnimatePresence } from "framer-motion"
 import { ImageUpload } from "@/components/image-upload"
+import Link from "next/link"
 
 interface Article {
   id: string
@@ -146,12 +147,20 @@ export default function ArticlesManagementPage() {
           <h1 className="text-3xl font-bold text-gray-900">아티클 관리</h1>
           <p className="text-gray-600 mt-2">최신 아티클과 인사이트를 관리합니다</p>
         </div>
-        {!isAdding && (
-          <Button onClick={() => setIsAdding(true)} className="bg-purple-600 hover:bg-purple-700">
-            <Plus className="w-4 h-4 mr-2" />
-            새 아티클 추가
-          </Button>
-        )}
+        <div className="flex gap-2">
+          <Link href="/admin/articles/bulk">
+            <Button variant="outline">
+              <FileJson className="w-4 h-4 mr-2" />
+              일괄 추가
+            </Button>
+          </Link>
+          {!isAdding && (
+            <Button onClick={() => setIsAdding(true)} className="bg-purple-600 hover:bg-purple-700">
+              <Plus className="w-4 h-4 mr-2" />
+              새 아티클 추가
+            </Button>
+          )}
+        </div>
       </div>
 
       {/* Add Form */}

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { ChevronLeft, ChevronRight, Search, Menu } from "lucide-react"
+import Link from "next/link"
 import { supabase } from "@/lib/supabase"
 
 export default function HomePage() {
@@ -462,12 +463,16 @@ export default function HomePage() {
                     {article.badge_text && (
                       <div className="mb-2">
                         {article.badge_text.split(',').map((badge: string, idx: number) => (
-                          <Badge 
+                          <Link 
                             key={idx} 
-                            className={`${getBadgeClassName(article.badge_type)} ${idx > 0 ? 'ml-1' : ''}`}
+                            href={`/tag/${encodeURIComponent(badge.trim())}`}
                           >
-                            {badge.trim()}
-                          </Badge>
+                            <Badge 
+                              className={`${getBadgeClassName(article.badge_type)} ${idx > 0 ? 'ml-1' : ''} cursor-pointer hover:opacity-80`}
+                            >
+                              {badge.trim()}
+                            </Badge>
+                          </Link>
                         ))}
                       </div>
                     )}
