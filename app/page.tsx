@@ -231,7 +231,7 @@ export default function HomePage() {
         <section className="relative bg-gray-50 pt-24 pb-56 overflow-hidden">
           <div className="absolute bottom-0 left-0 right-0 w-full z-0">
             <img 
-              src="/hero-bottom-bg.png" 
+              src="https://bzzjkcrbwwrqlumxigag.supabase.co/storage/v1/object/public/post-images/hero/hero-bottom-bg.png" 
               alt="" 
               className="w-full h-auto"
             />
@@ -519,7 +519,7 @@ export default function HomePage() {
                   }}
                 >
                   <img 
-                    src="/read-now.webp" 
+                    src="https://bzzjkcrbwwrqlumxigag.supabase.co/storage/v1/object/public/post-images/misc/read-now.webp" 
                     alt="READ NOW" 
                     className="w-24 h-24 md:w-32 md:h-32"
                   />
@@ -577,7 +577,7 @@ export default function HomePage() {
             transition={{ type: "spring", stiffness: 300 }}
           >
             <img 
-              src={isHoveringGoguma ? "/broken-goguma.webp" : "/footer-goguma.webp"} 
+              src={isHoveringGoguma ? "https://bzzjkcrbwwrqlumxigag.supabase.co/storage/v1/object/public/post-images/misc/broken-goguma.webp" : "https://bzzjkcrbwwrqlumxigag.supabase.co/storage/v1/object/public/post-images/misc/footer-goguma.webp"} 
               alt="고구마" 
               className="w-full h-full object-contain"
             />
