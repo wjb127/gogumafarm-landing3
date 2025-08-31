@@ -121,3 +121,51 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Hover Effects - 부드러운 호버 애니메이션 */
+@layer utilities {
+  /* 카드 호버 효과 */
+  .hover-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .hover-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  }
+  
+  /* 이미지 줌 효과 */
+  .hover-zoom {
+    overflow: hidden;
+  }
+  
+  .hover-zoom img {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .hover-zoom:hover img {
+    transform: scale(1.1);
+  }
+  
+  /* 버튼 스케일 효과 */
+  .hover-scale {
+    transition: transform 0.2s ease;
+  }
+  
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+  
+  .hover-scale:active {
+    transform: scale(0.95);
+  }
+  
+  /* 부드러운 그로우 효과 */
+  .hover-glow {
+    transition: all 0.3s ease;
+  }
+  
+  .hover-glow:hover {
+    box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
+  }
+}

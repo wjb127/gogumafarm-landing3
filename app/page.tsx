@@ -333,15 +333,17 @@ export default function HomePage() {
               transition={{ duration: 0.5 }}
             >
               <motion.div
-                className="order-2 lg:order-1"
+                className="order-2 lg:order-1 overflow-hidden rounded-lg"
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
+                whileHover={{ scale: 1.02 }}
               >
-                <img 
+                <motion.img 
                   src={getImageUrl(heroContents[currentHeroIndex].image_url)} 
                   alt={heroContents[currentHeroIndex].title} 
-                  className="w-full rounded-lg shadow-xl" 
+                  className="w-full rounded-lg shadow-xl transition-transform duration-500" 
+                  whileHover={{ scale: 1.05 }}
                 />
               </motion.div>
               <motion.div
@@ -501,13 +503,13 @@ export default function HomePage() {
               <motion.div key={article.id} variants={fadeInUp}>
                 <Link href={`/article/${article.id}`}>
                   <Card 
-                    className="overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+                    className="overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer hover-card group"
                   >
-                  <div className="relative">
+                  <div className="relative overflow-hidden">
                     <img 
                       src={getImageUrl(article.image_url)} 
                       alt={article.title} 
-                      className="w-full h-64 object-cover"
+                      className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
                     />
                   </div>
                   <CardContent className="pt-2 px-4 pb-4">
@@ -578,22 +580,26 @@ export default function HomePage() {
                 </p>
                 <div className="border-b border-gray-300 mb-8"></div>
                 <div className="flex gap-2">
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className="rounded-full bg-gray-100"
-                    onClick={handlePrevNews}
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                  </Button>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className="rounded-full bg-gray-100"
-                    onClick={handleNextNews}
-                  >
-                    <ChevronRight className="w-4 h-4" />
-                  </Button>
+                  <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="rounded-full bg-gray-100 transition-all hover:bg-gray-200"
+                      onClick={handlePrevNews}
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                    </Button>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="rounded-full bg-gray-100 transition-all hover:bg-gray-200"
+                      onClick={handleNextNews}
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </Button>
+                  </motion.div>
                 </div>
               </div>
 
@@ -636,14 +642,19 @@ export default function HomePage() {
                         const imageIndex = (currentNewsIndex + offset) % newsClippings.length;
                         const news = newsClippings[imageIndex];
                         return (
-                          <div key={offset} className="relative">
+                          <motion.div 
+                            key={offset} 
+                            className="relative overflow-hidden rounded-lg group cursor-pointer"
+                            whileHover={{ scale: 1.03 }}
+                            transition={{ duration: 0.3 }}
+                            onClick={() => news.link_url && window.open(news.link_url, '_blank')}
+                          >
                             <img 
                               src={getImageUrl(news.image_url)} 
                               alt={news.title || `뉴스 ${imageIndex + 1}`}
-                              className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
-                              onClick={() => news.link_url && window.open(news.link_url, '_blank')}
+                              className="w-full h-48 sm:h-56 md:h-64 object-cover shadow-lg transition-transform duration-500 group-hover:scale-110"
                             />
-                          </div>
+                          </motion.div>
                         );
                       })}
                     </motion.div>
