@@ -552,11 +552,13 @@ export default function HomePage() {
             viewport={{ once: true }}
             transition={{ delay: 0.5 }}
           >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button variant="outline" className="bg-black text-white hover:bg-gray-800 px-8 py-2">
-                MORE
-              </Button>
-            </motion.div>
+            <Link href="/articles">
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button variant="outline" className="bg-black text-white hover:bg-gray-800 px-8 py-2">
+                  MORE
+                </Button>
+              </motion.div>
+            </Link>
           </motion.div>
         </section>
       )}
