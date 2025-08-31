@@ -38,6 +38,14 @@ export default function HomePage() {
         .eq('is_active', true)
         .order('order_index', { ascending: true })
         .limit(3)
+      
+      // 데이터 변환 (image -> image_url, badges 파싱)
+      if (heroData) {
+        heroData.forEach(item => {
+          item.image_url = item.image
+          item.badge_text = item.badges ? item.badges.map((b: any) => b.text).join(',') : ''
+        })
+      }
 
       // 아티클 가져오기
       const { data: articlesData } = await supabase
@@ -46,6 +54,15 @@ export default function HomePage() {
         .eq('is_active', true)
         .order('order_index', { ascending: true })
         .limit(6)
+      
+      // 데이터 변환 (image -> image_url, badges 파싱)
+      if (articlesData) {
+        articlesData.forEach(item => {
+          item.image_url = item.image
+          item.badge_text = item.badges ? item.badges.map((b: any) => b.text).join(',') : ''
+          item.badge_type = item.category // category를 badge_type으로 사용
+        })
+      }
 
       // 뉴스 클리핑 가져오기
       const { data: newsData } = await supabase
@@ -53,6 +70,13 @@ export default function HomePage() {
         .select('*')
         .eq('is_active', true)
         .order('order_index', { ascending: true })
+      
+      // 데이터 변환 (image -> image_url)
+      if (newsData) {
+        newsData.forEach(item => {
+          item.image_url = item.image
+        })
+      }
 
       // TOP 10 아이템 가져오기
       const { data: top10Data } = await supabase
