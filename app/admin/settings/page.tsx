@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
-import { Settings, Save, RefreshCw, Database, Globe, Mail, Phone } from "lucide-react"
+import { Settings, Save, RefreshCw, Database, Globe, Mail, Phone, Link, Navigation, ExternalLink } from "lucide-react"
 import { supabase } from "@/lib/supabase"
 
 interface SiteSettings {
@@ -244,6 +244,145 @@ export default function SettingsPage() {
               })}
               placeholder="https://blog.gogumafarm.com"
             />
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* URL 관리 - 네비게이션 */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Navigation className="w-5 h-5" />
+            네비게이션 URL 관리
+          </CardTitle>
+          <CardDescription>메뉴와 버튼의 링크를 설정합니다</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <Label>{settings.nav_link_1 || "최신 밈과 트렌드"} - URL</Label>
+              <Input 
+                value={settings.nav_link_1_url || "#"}
+                onChange={(e) => setSettings({ ...settings, nav_link_1_url: e.target.value })}
+                placeholder="URL 입력 (예: /articles, https://example.com)"
+              />
+            </div>
+            <div>
+              <Label>{settings.nav_link_2 || "핵심 전략과 레퍼런스"} - URL</Label>
+              <Input 
+                value={settings.nav_link_2_url || "#"}
+                onChange={(e) => setSettings({ ...settings, nav_link_2_url: e.target.value })}
+                placeholder="URL 입력"
+              />
+            </div>
+            <div>
+              <Label>{settings.nav_link_3 || "일잘러 스킬셋"} - URL</Label>
+              <Input 
+                value={settings.nav_link_3_url || "#"}
+                onChange={(e) => setSettings({ ...settings, nav_link_3_url: e.target.value })}
+                placeholder="URL 입력"
+              />
+            </div>
+            <div>
+              <Label>{settings.nav_link_4 || "슴씨피드"} - URL</Label>
+              <Input 
+                value={settings.nav_link_4_url || "#"}
+                onChange={(e) => setSettings({ ...settings, nav_link_4_url: e.target.value })}
+                placeholder="URL 입력"
+              />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* URL 관리 - CTA 버튼 */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <ExternalLink className="w-5 h-5" />
+            CTA 버튼 URL 관리
+          </CardTitle>
+          <CardDescription>헤더 CTA 버튼의 링크를 설정합니다</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div>
+            <Label>{settings.header_cta_1 || "문의하기"} - URL</Label>
+            <Input 
+              value={settings.header_cta_1_url || "#"}
+              onChange={(e) => setSettings({ ...settings, header_cta_1_url: e.target.value })}
+              placeholder="URL 입력 (예: /contact, mailto:email@example.com)"
+            />
+          </div>
+          <div>
+            <Label>{settings.header_cta_2 || "뉴스레터 구독하기"} - URL</Label>
+            <Input 
+              value={settings.header_cta_2_url || "#"}
+              onChange={(e) => setSettings({ ...settings, header_cta_2_url: e.target.value })}
+              placeholder="URL 입력 (예: /newsletter, https://forms.google.com/...)"
+            />
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* URL 관리 - 기타 링크 */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Link className="w-5 h-5" />
+            기타 페이지 URL 관리
+          </CardTitle>
+          <CardDescription>푸터 및 기타 페이지 링크를 설정합니다</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <Label>개인정보처리방침 URL</Label>
+              <Input 
+                value={settings.footer_privacy_url || "/privacy"}
+                onChange={(e) => setSettings({ ...settings, footer_privacy_url: e.target.value })}
+                placeholder="/privacy"
+              />
+            </div>
+            <div>
+              <Label>이용약관 URL</Label>
+              <Input 
+                value={settings.footer_terms_url || "/terms"}
+                onChange={(e) => setSettings({ ...settings, footer_terms_url: e.target.value })}
+                placeholder="/terms"
+              />
+            </div>
+            <div>
+              <Label>문의하기 URL</Label>
+              <Input 
+                value={settings.footer_contact_url || "/contact"}
+                onChange={(e) => setSettings({ ...settings, footer_contact_url: e.target.value })}
+                placeholder="/contact"
+              />
+            </div>
+            <div>
+              <Label>관리자 패널 URL</Label>
+              <Input 
+                value={settings.admin_panel_url || "/admin"}
+                onChange={(e) => setSettings({ ...settings, admin_panel_url: e.target.value })}
+                placeholder="/admin"
+              />
+            </div>
+            <div>
+              <Label>전체 아티클 페이지 URL</Label>
+              <Input 
+                value={settings.all_articles_url || "/articles"}
+                onChange={(e) => setSettings({ ...settings, all_articles_url: e.target.value })}
+                placeholder="/articles"
+              />
+            </div>
+            <div>
+              <Label>인스타그램 URL</Label>
+              <Input 
+                value={settings.instagram_url || "https://instagram.com"}
+                onChange={(e) => setSettings({ ...settings, instagram_url: e.target.value })}
+                placeholder="https://instagram.com/youraccount"
+              />
+            </div>
           </div>
         </CardContent>
       </Card>

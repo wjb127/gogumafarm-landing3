@@ -240,13 +240,13 @@ export default function HomePage() {
               />
             </motion.div>
             <nav className="hidden md:flex items-center gap-6">
-              <a href="#" className="nav-link">
+              <a href={siteSettings.nav_link_1_url || "#"} className="nav-link">
                 {siteSettings.nav_link_1 || "최신 밈과 트렌드"}
               </a>
-              <a href="#" className="nav-link">
+              <a href={siteSettings.nav_link_2_url || "#"} className="nav-link">
                 {siteSettings.nav_link_2 || "핵심 전략과 레퍼런스"}
               </a>
-              <a href="#" className="nav-link">
+              <a href={siteSettings.nav_link_3_url || "#"} className="nav-link">
                 {siteSettings.nav_link_3 || "일잘러 스킬셋"}
               </a>
             </nav>
@@ -254,10 +254,10 @@ export default function HomePage() {
           
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-4">
-            <a href="#" className="text-gray-700 hover:text-black">
+            <a href={siteSettings.header_cta_1_url || "#"} className="text-gray-700 hover:text-black">
               {siteSettings.header_cta_1 || "문의하기"}
             </a>
-            <a href="#" className="text-gray-700 hover:text-black">
+            <a href={siteSettings.header_cta_2_url || "#"} className="text-gray-700 hover:text-black">
               {siteSettings.header_cta_2 || "뉴스레터 구독하기"}
             </a>
             <Search className="w-5 h-5 text-gray-600 cursor-pointer" />
@@ -283,27 +283,27 @@ export default function HomePage() {
               className="md:hidden border-t border-gray-200 mt-3"
             >
               <nav className="flex flex-col py-4 px-4 space-y-3">
-                <a href="#" className="text-gray-700 hover:text-black hover:bg-gray-50 px-3 py-2 rounded transition-colors">
+                <a href={siteSettings.nav_link_1_url || "#"} className="text-gray-700 hover:text-black hover:bg-gray-50 px-3 py-2 rounded transition-colors">
                   {siteSettings.nav_link_1 || "최신 밈과 트렌드"}
                 </a>
-                <a href="#" className="text-gray-700 hover:text-black hover:bg-gray-50 px-3 py-2 rounded transition-colors">
+                <a href={siteSettings.nav_link_2_url || "#"} className="text-gray-700 hover:text-black hover:bg-gray-50 px-3 py-2 rounded transition-colors">
                   {siteSettings.nav_link_2 || "핵심 전략과 레퍼런스"}
                 </a>
-                <a href="#" className="text-gray-700 hover:text-black hover:bg-gray-50 px-3 py-2 rounded transition-colors">
+                <a href={siteSettings.nav_link_3_url || "#"} className="text-gray-700 hover:text-black hover:bg-gray-50 px-3 py-2 rounded transition-colors">
                   {siteSettings.nav_link_3 || "일잘러 스킬셋"}
                 </a>
                 <div className="border-t pt-3 mt-3 space-y-3">
-                  <a href="#" className="text-gray-700 hover:text-black hover:bg-gray-50 px-3 py-2 rounded transition-colors block">
+                  <a href={siteSettings.header_cta_1_url || "#"} className="text-gray-700 hover:text-black hover:bg-gray-50 px-3 py-2 rounded transition-colors block">
                     {siteSettings.header_cta_1 || "문의하기"}
                   </a>
-                  <a href="#" className="text-gray-700 hover:text-black hover:bg-gray-50 px-3 py-2 rounded transition-colors block">
+                  <a href={siteSettings.header_cta_2_url || "#"} className="text-gray-700 hover:text-black hover:bg-gray-50 px-3 py-2 rounded transition-colors block">
                     {siteSettings.header_cta_2 || "뉴스레터 구독하기"}
                   </a>
                   <div className="flex items-center gap-2 px-3 py-2">
                     <Search className="w-5 h-5 text-gray-600" />
                     <span className="text-gray-600">검색</span>
                   </div>
-                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-black hover:bg-gray-50 px-3 py-2 rounded transition-colors block">
+                  <a href={siteSettings.instagram_url || "https://instagram.com"} target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-black hover:bg-gray-50 px-3 py-2 rounded transition-colors block">
                     📷 인스타그램
                   </a>
                 </div>
@@ -554,7 +554,7 @@ export default function HomePage() {
             viewport={{ once: true }}
             transition={{ delay: 0.5 }}
           >
-            <Link href="/articles">
+            <Link href={siteSettings.all_articles_url || "/articles"}>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button variant="outline" className="bg-black text-white hover:bg-gray-800 px-8 py-2">
                   MORE
