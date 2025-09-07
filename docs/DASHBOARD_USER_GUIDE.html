@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>고구마팜 관리자 대시보드 사용 가이드</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">고구마팜 관리자 대시보드 사용 가이드</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#고구마팜-관리자-대시보드-사용-가이드"
+id="toc-고구마팜-관리자-대시보드-사용-가이드">고구마팜 관리자 대시보드
+사용 가이드</a>
+<ul>
+<li><a href="#목차" id="toc-목차">목차</a></li>
+<li><a href="#개요" id="toc-개요">개요</a>
+<ul>
+<li><a href="#주요-특징" id="toc-주요-특징">주요 특징</a></li>
+</ul></li>
+<li><a href="#접속-방법" id="toc-접속-방법">접속 방법</a>
+<ul>
+<li><a href="#단계-관리자-페이지-접속"
+id="toc-단계-관리자-페이지-접속">1단계: 관리자 페이지 접속</a></li>
+<li><a href="#단계-로그인" id="toc-단계-로그인">2단계: 로그인</a></li>
+<li><a href="#보안-주의사항" id="toc-보안-주의사항">⚠️ 보안
+주의사항</a></li>
+</ul></li>
+<li><a href="#대시보드-구성" id="toc-대시보드-구성">대시보드 구성</a>
+<ul>
+<li><a href="#메인-대시보드" id="toc-메인-대시보드">📊 메인
+대시보드</a></li>
+<li><a href="#사이드바-메뉴" id="toc-사이드바-메뉴">🗂️ 사이드바
+메뉴</a></li>
+</ul></li>
+<li><a href="#주요-기능별-가이드" id="toc-주요-기능별-가이드">주요
+기능별 가이드</a>
+<ul>
+<li><a href="#메인-캐러셀-관리" id="toc-메인-캐러셀-관리">🎠 메인 캐러셀
+관리</a></li>
+<li><a href="#아티클-관리" id="toc-아티클-관리">📝 아티클 관리</a></li>
+<li><a href="#뉴스클리핑-관리" id="toc-뉴스클리핑-관리">📰 뉴스클리핑
+관리</a></li>
+<li><a href="#top-10-관리" id="toc-top-10-관리">🏆 TOP 10 관리</a></li>
+<li><a href="#사이트-설정" id="toc-사이트-설정">⚙️ 사이트 설정</a></li>
+</ul></li>
+<li><a href="#콘텐츠-작성-팁" id="toc-콘텐츠-작성-팁">콘텐츠 작성 팁</a>
+<ul>
+<li><a href="#이미지-최적화" id="toc-이미지-최적화">📸 이미지
+최적화</a></li>
+<li><a href="#텍스트-작성" id="toc-텍스트-작성">✍️ 텍스트 작성</a></li>
+<li><a href="#태그-활용" id="toc-태그-활용">🏷️ 태그 활용</a></li>
+<li><a href="#링크-설정" id="toc-링크-설정">🔗 링크 설정</a></li>
+</ul></li>
+<li><a href="#자주-묻는-질문" id="toc-자주-묻는-질문">자주 묻는 질문</a>
+<ul>
+<li><a href="#q1-로그인이-계속-풀려요"
+id="toc-q1-로그인이-계속-풀려요">Q1: 로그인이 계속 풀려요</a></li>
+<li><a href="#q2-이미지가-표시되지-않아요"
+id="toc-q2-이미지가-표시되지-않아요">Q2: 이미지가 표시되지
+않아요</a></li>
+<li><a href="#q3-변경사항이-사이트에-반영되지-않아요"
+id="toc-q3-변경사항이-사이트에-반영되지-않아요">Q3: 변경사항이 사이트에
+반영되지 않아요</a></li>
+<li><a href="#q4-실수로-삭제했어요" id="toc-q4-실수로-삭제했어요">Q4:
+실수로 삭제했어요</a></li>
+<li><a href="#q5-여러-명이-동시에-사용할-수-있나요"
+id="toc-q5-여러-명이-동시에-사용할-수-있나요">Q5: 여러 명이 동시에
+사용할 수 있나요?</a></li>
+</ul></li>
+<li><a href="#문제-해결" id="toc-문제-해결">문제 해결</a>
+<ul>
+<li><a href="#일반적인-문제" id="toc-일반적인-문제">🔧 일반적인
+문제</a></li>
+<li><a href="#지원-요청" id="toc-지원-요청">📞 지원 요청</a></li>
+</ul></li>
+<li><a href="#보안-권장사항" id="toc-보안-권장사항">보안 권장사항</a>
+<ul>
+<li><a href="#비밀번호-관리" id="toc-비밀번호-관리">🔐 비밀번호
+관리</a></li>
+<li><a href="#접근-권한" id="toc-접근-권한">👤 접근 권한</a></li>
+<li><a href="#데이터-백업" id="toc-데이터-백업">💾 데이터 백업</a></li>
+</ul></li>
+<li><a href="#업데이트-내역" id="toc-업데이트-내역">업데이트 내역</a>
+<ul>
+<li><a href="#v1.0.0-2025.01.07" id="toc-v1.0.0-2025.01.07">v1.0.0
+(2025.01.07)</a></li>
+<li><a href="#예정된-업데이트" id="toc-예정된-업데이트">예정된
+업데이트</a></li>
+</ul></li>
+<li><a href="#부록" id="toc-부록">부록</a>
+<ul>
+<li><a href="#단축키-모음" id="toc-단축키-모음">단축키 모음</a></li>
+<li><a href="#용어-설명" id="toc-용어-설명">용어 설명</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="고구마팜-관리자-대시보드-사용-가이드">고구마팜 관리자 대시보드
+사용 가이드</h1>
+<h2 id="목차">목차</h2>
+<ol type="1">
+<li><a href="#개요">개요</a></li>
+<li><a href="#접속-방법">접속 방법</a></li>
+<li><a href="#대시보드-구성">대시보드 구성</a></li>
+<li><a href="#주요-기능별-가이드">주요 기능별 가이드</a></li>
+<li><a href="#자주-묻는-질문">자주 묻는 질문</a></li>
+<li><a href="#문제-해결">문제 해결</a></li>
+</ol>
+<hr />
+<h2 id="개요">개요</h2>
+<p>고구마팜 관리자 대시보드는 웹사이트의 모든 콘텐츠를 효율적으로 관리할
+수 있는 통합 관리 시스템입니다. 코드 수정 없이 콘텐츠를 추가, 수정,
+삭제할 수 있으며, 실시간으로 웹사이트에 반영됩니다.</p>
+<h3 id="주요-특징">주요 특징</h3>
+<ul>
+<li>🎯 <strong>직관적인 인터페이스</strong>: 복잡한 기술 지식 없이도
+쉽게 사용 가능</li>
+<li>⚡ <strong>실시간 반영</strong>: 수정사항이 즉시 웹사이트에
+적용</li>
+<li>🔐 <strong>보안</strong>: 비밀번호 기반 접근 제어</li>
+<li>📱 <strong>반응형 디자인</strong>: 모바일, 태블릿, 데스크톱 모두
+지원</li>
+</ul>
+<h2 id="접속-방법">접속 방법</h2>
+<h3 id="단계-관리자-페이지-접속">1단계: 관리자 페이지 접속</h3>
+<pre><code>https://[도메인]/admin</code></pre>
+<p>또는 개발 환경에서:</p>
+<pre><code>http://localhost:3000/admin</code></pre>
+<h3 id="단계-로그인">2단계: 로그인</h3>
+<ul>
+<li><strong>비밀번호</strong>: <code>gogumafarm_2025!</code></li>
+<li>비밀번호 입력 후 “로그인” 버튼 클릭</li>
+</ul>
+<h3 id="보안-주의사항">⚠️ 보안 주의사항</h3>
+<ul>
+<li>비밀번호는 절대 공유하지 마세요</li>
+<li>공용 컴퓨터에서는 사용 후 반드시 로그아웃</li>
+<li>브라우저를 새로고침하면 자동 로그아웃됩니다</li>
+</ul>
+<h2 id="대시보드-구성">대시보드 구성</h2>
+<h3 id="메인-대시보드">📊 메인 대시보드</h3>
+<p>로그인 후 처음 표시되는 화면으로, 전체 콘텐츠 현황을 한눈에 확인할 수
+있습니다.</p>
+<h4 id="콘텐츠-통계-카드">콘텐츠 통계 카드</h4>
+<ul>
+<li><strong>메인 캐러셀</strong>: 현재 활성화된 슬라이드 수</li>
+<li><strong>아티클</strong>: 게시된 글 총 개수</li>
+<li><strong>뉴스클리핑</strong>: 등록된 뉴스 이미지 수</li>
+<li><strong>TOP 10</strong>: 인기 아티클 수</li>
+</ul>
+<h4 id="빠른-실행-버튼">빠른 실행 버튼</h4>
+<p>자주 사용하는 기능으로 바로 이동: - 캐러셀 수정 - 아티클 추가 - 뉴스
+업데이트 - TOP 10 편집</p>
+<h4 id="최근-활동">최근 활동</h4>
+<p>최근 변경사항과 업데이트 내역 표시</p>
+<h3 id="사이드바-메뉴">🗂️ 사이드바 메뉴</h3>
+<table>
+<thead>
+<tr>
+<th>메뉴</th>
+<th>설명</th>
+<th>주요 기능</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>📈 대시보드</td>
+<td>전체 현황 요약</td>
+<td>통계, 빠른 실행, 최근 활동</td>
+</tr>
+<tr>
+<td>📊 방문자 통계</td>
+<td>사이트 분석</td>
+<td>방문자 수, 페이지뷰, 트래픽 분석</td>
+</tr>
+<tr>
+<td>🎠 메인 캐러셀</td>
+<td>메인 페이지 슬라이드</td>
+<td>추가, 수정, 삭제, 순서 변경</td>
+</tr>
+<tr>
+<td>📝 아티클 관리</td>
+<td>블로그 글 관리</td>
+<td>작성, 편집, 발행, 비활성화</td>
+</tr>
+<tr>
+<td>📰 뉴스클리핑</td>
+<td>뉴스 이미지 관리</td>
+<td>이미지 업로드, 캡션 작성</td>
+</tr>
+<tr>
+<td>🏆 TOP 10 관리</td>
+<td>인기 콘텐츠 설정</td>
+<td>순위 지정, 내용 편집</td>
+</tr>
+<tr>
+<td>⚙️ 사이트 설정</td>
+<td>전체 설정 관리</td>
+<td>기본 정보, URL 관리, 소셜 미디어</td>
+</tr>
+</tbody>
+</table>
+<h2 id="주요-기능별-가이드">주요 기능별 가이드</h2>
+<h3 id="메인-캐러셀-관리">🎠 메인 캐러셀 관리</h3>
+<h4 id="새-슬라이드-추가">새 슬라이드 추가</h4>
+<ol type="1">
+<li>“메인 캐러셀” 메뉴 클릭</li>
+<li>“새 콘텐츠 추가” 버튼 클릭</li>
+<li>필수 정보 입력:
+<ul>
+<li><strong>제목</strong>: 슬라이드 메인 텍스트 (최대 100자)</li>
+<li><strong>설명</strong>: 부가 설명 (최대 200자)</li>
+<li><strong>이미지 URL</strong>: 배경 이미지 주소</li>
+<li><strong>링크 URL</strong>: 클릭 시 이동할 페이지</li>
+<li><strong>배지</strong>: 카테고리 태그 (선택사항)</li>
+</ul></li>
+<li>“저장” 버튼 클릭</li>
+</ol>
+<h4 id="슬라이드-순서-변경">슬라이드 순서 변경</h4>
+<ol type="1">
+<li>슬라이드 목록에서 드래그 앤 드롭</li>
+<li>또는 순서 번호 직접 수정</li>
+<li>“순서 저장” 버튼 클릭</li>
+</ol>
+<h4 id="슬라이드-활성화비활성화">슬라이드 활성화/비활성화</h4>
+<ul>
+<li>토글 스위치로 즉시 ON/OFF</li>
+<li>비활성화된 슬라이드는 웹사이트에 표시되지 않음</li>
+</ul>
+<h3 id="아티클-관리">📝 아티클 관리</h3>
+<h4 id="새-아티클-작성">새 아티클 작성</h4>
+<ol type="1">
+<li>“아티클 관리” 메뉴 클릭</li>
+<li>“새 아티클 작성” 버튼 클릭</li>
+<li>아티클 정보 입력:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>필드</th>
+<th>설명</th>
+<th>팁</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>제목</td>
+<td>아티클 제목</td>
+<td>SEO를 위해 키워드 포함 권장</td>
+</tr>
+<tr>
+<td>내용</td>
+<td>본문 내용</td>
+<td>마크다운 문법 지원</td>
+</tr>
+<tr>
+<td>썸네일</td>
+<td>대표 이미지</td>
+<td>16:9 비율 권장</td>
+</tr>
+<tr>
+<td>태그</td>
+<td>카테고리 태그</td>
+<td>쉼표로 구분, 최대 5개</td>
+</tr>
+<tr>
+<td>작성일</td>
+<td>게시 날짜</td>
+<td>미래 날짜 설정 시 예약 게시</td>
+</tr>
+</tbody>
+</table>
+<ol start="4" type="1">
+<li>“미리보기”로 확인</li>
+<li>“게시” 또는 “임시저장” 선택</li>
+</ol>
+<h4 id="아티클-편집">아티클 편집</h4>
+<ol type="1">
+<li>아티클 목록에서 편집할 글 선택</li>
+<li>“편집” 버튼 클릭</li>
+<li>내용 수정</li>
+<li>“업데이트” 버튼 클릭</li>
+</ol>
+<h4 id="아티클-삭제">아티클 삭제</h4>
+<ul>
+<li>⚠️ <strong>주의</strong>: 삭제된 아티클은 복구할 수 없습니다</li>
+<li>삭제 전 “비활성화” 옵션 먼저 고려</li>
+<li>삭제 시 확인 팝업이 표시됨</li>
+</ul>
+<h3 id="뉴스클리핑-관리">📰 뉴스클리핑 관리</h3>
+<h4 id="뉴스-이미지-추가">뉴스 이미지 추가</h4>
+<ol type="1">
+<li>“뉴스클리핑” 메뉴 클릭</li>
+<li>“이미지 추가” 버튼 클릭</li>
+<li>이미지 업로드 방법 선택:
+<ul>
+<li><strong>로컬 업로드</strong>: 컴퓨터에서 파일 선택</li>
+<li><strong>URL 입력</strong>: 외부 이미지 주소 입력</li>
+</ul></li>
+<li>이미지 정보 입력:
+<ul>
+<li>제목 (선택사항)</li>
+<li>출처 (예: MBC, KBS)</li>
+<li>날짜</li>
+</ul></li>
+<li>“저장” 버튼 클릭</li>
+</ol>
+<h4 id="슬라이더-설정">슬라이더 설정</h4>
+<ul>
+<li><strong>자동 재생</strong>: ON/OFF 토글</li>
+<li><strong>재생 속도</strong>: 3초, 5초, 7초 중 선택</li>
+<li><strong>전환 효과</strong>: 페이드, 슬라이드 중 선택</li>
+</ul>
+<h3 id="top-10-관리">🏆 TOP 10 관리</h3>
+<h4 id="top-10-항목-편집">TOP 10 항목 편집</h4>
+<ol type="1">
+<li>“TOP 10 관리” 메뉴 클릭</li>
+<li>1-10위 항목 목록 표시</li>
+<li>각 항목의 “편집” 버튼 클릭</li>
+<li>내용 수정:
+<ul>
+<li>순위 (1-10)</li>
+<li>제목</li>
+<li>설명</li>
+<li>링크 URL</li>
+</ul></li>
+<li>“저장” 버튼 클릭</li>
+</ol>
+<h4 id="순위-변경">순위 변경</h4>
+<ul>
+<li>드래그 앤 드롭으로 순서 조정</li>
+<li>또는 순위 번호 직접 입력</li>
+<li>중복 순위 자동 조정됨</li>
+</ul>
+<h3 id="사이트-설정">⚙️ 사이트 설정</h3>
+<h4 id="기본-정보-설정">기본 정보 설정</h4>
+<ul>
+<li><strong>사이트 제목</strong>: 브라우저 탭에 표시</li>
+<li><strong>사이트 설명</strong>: 검색엔진 설명</li>
+<li><strong>푸터 텍스트</strong>: 하단 저작권 표시</li>
+</ul>
+<h4 id="연락처-정보">연락처 정보</h4>
+<ul>
+<li>이메일 주소</li>
+<li>전화번호</li>
+<li>주소</li>
+</ul>
+<h4 id="소셜-미디어-링크">소셜 미디어 링크</h4>
+<ul>
+<li>Facebook</li>
+<li>Instagram</li>
+<li>YouTube</li>
+<li>Blog</li>
+</ul>
+<h4 id="url-관리">URL 관리</h4>
+<p>모든 링크를 중앙에서 관리:</p>
+<p><strong>네비게이션 메뉴 URL</strong> - 최신 밈과 트렌드 - 핵심 전략과
+레퍼런스 - 일잘러 스킬셋 - 슴씨피드</p>
+<p><strong>CTA 버튼 URL</strong> - 문의하기 - 뉴스레터 구독하기</p>
+<p><strong>기타 페이지 URL</strong> - 개인정보처리방침 - 이용약관 - 전체
+아티클 페이지</p>
+<h2 id="콘텐츠-작성-팁">콘텐츠 작성 팁</h2>
+<h3 id="이미지-최적화">📸 이미지 최적화</h3>
+<ul>
+<li><strong>형식</strong>: JPG, PNG, WebP 권장</li>
+<li><strong>크기</strong>: 최대 2MB</li>
+<li><strong>해상도</strong>:
+<ul>
+<li>캐러셀: 1920x1080</li>
+<li>아티클: 1200x630</li>
+<li>뉴스: 800x600</li>
+</ul></li>
+</ul>
+<h3 id="텍스트-작성">✍️ 텍스트 작성</h3>
+<ul>
+<li><strong>제목</strong>: 40자 이내, 핵심 키워드 포함</li>
+<li><strong>설명</strong>: 150자 이내, 명확하고 간결하게</li>
+<li><strong>본문</strong>: 단락 구분, 소제목 활용</li>
+</ul>
+<h3 id="태그-활용">🏷️ 태그 활용</h3>
+<ul>
+<li>관련성 높은 태그 3-5개</li>
+<li>일관된 태그 체계 유지</li>
+<li>인기 태그 활용</li>
+</ul>
+<h3 id="링크-설정">🔗 링크 설정</h3>
+<ul>
+<li>내부 링크: <code>/article/123</code> 형식</li>
+<li>외부 링크: <code>https://</code> 포함 전체 URL</li>
+<li>이메일: <code>mailto:email@domain.com</code></li>
+</ul>
+<h2 id="자주-묻는-질문">자주 묻는 질문</h2>
+<h3 id="q1-로그인이-계속-풀려요">Q1: 로그인이 계속 풀려요</h3>
+<p><strong>A:</strong> 브라우저 새로고침 시 로그아웃되는 것은
+정상입니다. 보안을 위한 기능입니다.</p>
+<h3 id="q2-이미지가-표시되지-않아요">Q2: 이미지가 표시되지 않아요</h3>
+<p><strong>A:</strong> - 이미지 URL이 올바른지 확인 - HTTPS 사이트에서
+HTTP 이미지 사용 불가 - 이미지 파일 크기 확인 (최대 2MB)</p>
+<h3 id="q3-변경사항이-사이트에-반영되지-않아요">Q3: 변경사항이 사이트에
+반영되지 않아요</h3>
+<p><strong>A:</strong> - 저장 버튼을 클릭했는지 확인 - 브라우저 캐시
+새로고침 (Ctrl+F5) - 활성화 상태인지 확인</p>
+<h3 id="q4-실수로-삭제했어요">Q4: 실수로 삭제했어요</h3>
+<p><strong>A:</strong> 삭제된 콘텐츠는 복구할 수 없습니다. 중요한
+콘텐츠는 비활성화 기능을 사용하세요.</p>
+<h3 id="q5-여러-명이-동시에-사용할-수-있나요">Q5: 여러 명이 동시에
+사용할 수 있나요?</h3>
+<p><strong>A:</strong> 가능하지만, 동시에 같은 콘텐츠를 수정하면 마지막
+저장이 적용됩니다.</p>
+<h2 id="문제-해결">문제 해결</h2>
+<h3 id="일반적인-문제">🔧 일반적인 문제</h3>
+<h4 id="로그인-실패">로그인 실패</h4>
+<ul>
+<li>비밀번호 확인: <code>gogumafarm_2025!</code></li>
+<li>대소문자 구분 확인</li>
+<li>복사-붙여넣기 시 공백 제거</li>
+</ul>
+<h4 id="저장-실패">저장 실패</h4>
+<ul>
+<li>네트워크 연결 확인</li>
+<li>필수 필드 모두 입력했는지 확인</li>
+<li>특수문자 사용 확인</li>
+</ul>
+<h4 id="이미지-업로드-실패">이미지 업로드 실패</h4>
+<ul>
+<li>파일 크기 확인 (최대 2MB)</li>
+<li>파일 형식 확인 (JPG, PNG, WebP)</li>
+<li>파일명에 특수문자 제거</li>
+</ul>
+<h3 id="지원-요청">📞 지원 요청</h3>
+<p>기술 지원이 필요한 경우:</p>
+<p><strong>이메일</strong>: admin@gogumafarm.com<br />
+<strong>전화</strong>: 070-7825-0749<br />
+<strong>업무시간</strong>: 평일 09:00-18:00</p>
+<p>지원 요청 시 포함할 정보: 1. 문제 발생 일시 2. 수행한 작업 순서 3.
+오류 메시지 (있는 경우) 4. 스크린샷</p>
+<h2 id="보안-권장사항">보안 권장사항</h2>
+<h3 id="비밀번호-관리">🔐 비밀번호 관리</h3>
+<ul>
+<li>정기적인 비밀번호 변경 (3개월마다)</li>
+<li>비밀번호 공유 금지</li>
+<li>안전한 곳에 별도 보관</li>
+</ul>
+<h3 id="접근-권한">👤 접근 권한</h3>
+<ul>
+<li>관리자 권한은 최소 인원만</li>
+<li>퇴사자 발생 시 즉시 비밀번호 변경</li>
+<li>접속 기록 정기 확인</li>
+</ul>
+<h3 id="데이터-백업">💾 데이터 백업</h3>
+<ul>
+<li>중요 콘텐츠는 별도 백업</li>
+<li>정기적인 데이터베이스 백업</li>
+<li>이미지 파일 로컬 보관</li>
+</ul>
+<h2 id="업데이트-내역">업데이트 내역</h2>
+<h3 id="v1.0.0-2025.01.07">v1.0.0 (2025.01.07)</h3>
+<ul>
+<li>초기 버전 출시</li>
+<li>기본 CRUD 기능</li>
+<li>URL 관리 기능 추가</li>
+</ul>
+<h3 id="예정된-업데이트">예정된 업데이트</h3>
+<ul>
+<li>다중 관리자 계정</li>
+<li>콘텐츠 버전 관리</li>
+<li>자동 백업 기능</li>
+<li>상세 통계 분석</li>
+</ul>
+<hr />
+<p><em>최종 업데이트: 2025년 1월 7일</em><br />
+<em>문서 버전: 1.0.0</em><br />
+<em>작성자: 고구마팜 개발팀</em></p>
+<h2 id="부록">부록</h2>
+<h3 id="단축키-모음">단축키 모음</h3>
+<table>
+<thead>
+<tr>
+<th>단축키</th>
+<th>기능</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ctrl+S</td>
+<td>저장</td>
+</tr>
+<tr>
+<td>Ctrl+Z</td>
+<td>실행 취소</td>
+</tr>
+<tr>
+<td>Ctrl+Y</td>
+<td>다시 실행</td>
+</tr>
+<tr>
+<td>ESC</td>
+<td>팝업 닫기</td>
+</tr>
+</tbody>
+</table>
+<h3 id="용어-설명">용어 설명</h3>
+<ul>
+<li><strong>CMS</strong>: Content Management System (콘텐츠 관리
+시스템)</li>
+<li><strong>CRUD</strong>: Create, Read, Update, Delete (생성, 읽기,
+수정, 삭제)</li>
+<li><strong>SEO</strong>: Search Engine Optimization (검색엔진
+최적화)</li>
+<li><strong>CTA</strong>: Call to Action (행동 유도 버튼)</li>
+<li><strong>URL</strong>: Uniform Resource Locator (웹 주소)</li>
+</ul>
+</body>
+</html>
