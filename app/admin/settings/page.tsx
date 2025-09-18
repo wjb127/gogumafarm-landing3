@@ -21,6 +21,36 @@ interface SiteSettings {
     youtube?: string
     blog?: string
   }
+  // 푸터 텍스트 관련 필드
+  footer_term?: string
+  footer_privacy?: string
+  footer_address?: string
+  footer_phone?: string
+  footer_email?: string
+  footer_copyright?: string
+  // URL 관련 필드
+  nav_link_1?: string
+  nav_link_1_url?: string
+  nav_link_2?: string
+  nav_link_2_url?: string
+  nav_link_3?: string
+  nav_link_3_url?: string
+  nav_link_4?: string
+  nav_link_4_url?: string
+  header_cta_1?: string
+  header_cta_1_url?: string
+  header_cta_2?: string
+  header_cta_2_url?: string
+  footer_privacy_url?: string
+  footer_terms_url?: string
+  footer_contact_url?: string
+  admin_panel_url?: string
+  all_articles_url?: string
+  instagram_url?: string
+  // 추가 URL 필드
+  kakao_url?: string
+  naver_store_url?: string
+  business_info_url?: string
 }
 
 export default function SettingsPage() {
@@ -40,56 +70,206 @@ export default function SettingsPage() {
   }, [])
 
   const fetchSettings = async () => {
+    console.log("📥 Fetching settings from database...")
     const { data, error } = await supabase
       .from("kmong_12_site_settings")
       .select("*")
     
-    if (data && !error) {
-      const settingsObj: any = {}
+    console.log("Database response:", { data, error })
+    
+    if (data && data.length > 0 && !error) {
+      // URL은 첫 번째 행에서 가져오기 (모든 행에 동일)
+      const firstRow = data[0]
+      
+      // 텍스트 설정들 수집
+      const textSettings: any = {}
       data.forEach(item => {
-        if (item.value) {
-          settingsObj[item.key] = item.value
+        if (item.setting_key && item.setting_value) {
+          textSettings[item.setting_key] = item.setting_value
+          console.log(`Loading text setting: ${item.setting_key} =`, item.setting_value)
         }
       })
       
-      setSettings({
-        site_title: settingsObj.site_title || "고구마팜",
-        site_description: settingsObj.site_description || "마케팅 인사이트와 콘텐츠 전략",
-        contact_email: settingsObj.contact_email || "",
-        contact_phone: settingsObj.contact_phone || "",
-        footer_text: settingsObj.footer_text || "© 2025 고구마팜. All rights reserved.",
-        social_links: settingsObj.social_links || {}
-      })
+      const finalSettings = {
+        // 텍스트 설정들
+        site_title: textSettings.site_title || "고구마팜",
+        site_description: textSettings.site_description || "마케팅 인사이트와 콘텐츠 전략",
+        contact_email: textSettings.contact_email || "",
+        contact_phone: textSettings.contact_phone || "",
+        footer_text: textSettings.footer_text || "© 2025 고구마팜. All rights reserved.",
+        footer_term: textSettings.footer_term || "이용약관",
+        footer_privacy: textSettings.footer_privacy || "개인정보 수집 및 이용방침",
+        footer_address: textSettings.footer_address || "서울특별시 강남구 선릉로 648",
+        footer_phone: textSettings.footer_phone || "070-7825-0749",
+        footer_email: textSettings.footer_email || "info@gogumafarm.kr",
+        footer_copyright: textSettings.footer_copyright || "©2025. The SMC all rights reserved.",
+        
+        // URL 컬럼들 (직접 컬럼에서 읽기)
+        nav_link_1: textSettings.nav_link_1 || "최신 밈과 트렌드",
+        nav_link_2: textSettings.nav_link_2 || "핵심 전략과 레퍼런스",
+        nav_link_3: textSettings.nav_link_3 || "일잘러 스킬셋",
+        nav_link_4: textSettings.nav_link_4 || "슴씨피드",
+        header_cta_1: textSettings.header_cta_1 || "문의하기",
+        header_cta_2: textSettings.header_cta_2 || "뉴스레터 구독하기",
+        
+        nav_link_1_url: firstRow.nav_link_1_url || "#",
+        nav_link_2_url: firstRow.nav_link_2_url || "#",
+        nav_link_3_url: firstRow.nav_link_3_url || "#",
+        nav_link_4_url: firstRow.nav_link_4_url || "#",
+        header_cta_1_url: firstRow.header_cta_1_url || "#",
+        header_cta_2_url: firstRow.header_cta_2_url || "#",
+        instagram_url: firstRow.instagram_url || "",
+        youtube_url: firstRow.youtube_url || "",
+        facebook_url: firstRow.facebook_url || "",
+        twitter_url: firstRow.twitter_url || "",
+        blog_url: firstRow.blog_url || "",
+        footer_privacy_url: firstRow.footer_privacy_url || "/privacy",
+        footer_terms_url: firstRow.footer_terms_url || "/terms",
+        footer_contact_url: firstRow.footer_contact_url || "/contact",
+        admin_panel_url: firstRow.admin_panel_url || "/admin",
+        all_articles_url: firstRow.all_articles_url || "/articles",
+        newsletter_signup_url: firstRow.newsletter_signup_url || "#",
+        kakao_url: firstRow.kakao_url || "",
+        naver_store_url: firstRow.naver_store_url || "",
+        business_info_url: firstRow.business_info_url || "",
+        
+        // social_links 객체로 만들기
+        social_links: {
+          facebook: firstRow.facebook_url || "",
+          instagram: firstRow.instagram_url || "",
+          youtube: firstRow.youtube_url || "",
+          blog: firstRow.blog_url || ""
+        },
+        
+        // 추가 텍스트 설정
+        ...textSettings
+      }
+      
+      console.log("📋 Final settings loaded:", finalSettings)
+      setSettings(finalSettings)
+    } else if (error) {
+      console.error("❌ Error fetching settings:", error)
     }
     setLoading(false)
   }
 
   const handleSave = async () => {
     setSaving(true)
+    console.log("💾 Starting save process...")
+    console.log("Current settings to save:", settings)
     
-    const settingsToSave = [
-      { key: "site_title", value: settings.site_title },
-      { key: "site_description", value: settings.site_description },
-      { key: "contact_email", value: settings.contact_email },
-      { key: "contact_phone", value: settings.contact_phone },
-      { key: "footer_text", value: settings.footer_text },
-      { key: "social_links", value: settings.social_links }
+    let hasError = false
+    
+    // URL 필드들을 직접 컬럼으로 업데이트
+    const urlColumns = [
+      'nav_link_1_url', 'nav_link_2_url', 'nav_link_3_url', 'nav_link_4_url',
+      'header_cta_1_url', 'header_cta_2_url',
+      'instagram_url', 'youtube_url', 'facebook_url', 'twitter_url', 'blog_url',
+      'footer_privacy_url', 'footer_terms_url', 'footer_contact_url',
+      'admin_panel_url', 'all_articles_url', 'newsletter_signup_url',
+      'kakao_url', 'naver_store_url', 'business_info_url'
     ]
-
-    for (const setting of settingsToSave) {
-      await supabase
+    
+    // URL 업데이트 객체 생성
+    const urlUpdates: any = {}
+    urlColumns.forEach(col => {
+      if (col in settings) {
+        urlUpdates[col] = settings[col as keyof SiteSettings] || ''
+      }
+    })
+    
+    // social_links 객체 처리
+    if (settings.social_links) {
+      if (settings.social_links.facebook) urlUpdates.facebook_url = settings.social_links.facebook
+      if (settings.social_links.instagram) urlUpdates.instagram_url = settings.social_links.instagram
+      if (settings.social_links.youtube) urlUpdates.youtube_url = settings.social_links.youtube
+      if (settings.social_links.blog) urlUpdates.blog_url = settings.social_links.blog
+    }
+    
+    // 모든 행에 URL 업데이트 (URL은 모든 행에 동일하게 저장됨)
+    if (Object.keys(urlUpdates).length > 0) {
+      console.log("Updating URLs:", urlUpdates)
+      const { error: urlError } = await supabase
         .from("kmong_12_site_settings")
-        .upsert({
-          key: setting.key,
-          value: setting.value,
-          updated_at: new Date().toISOString()
-        }, {
-          onConflict: "key"
-        })
+        .update(urlUpdates)
+        .not('id', 'is', null) // 모든 행 업데이트
+      
+      if (urlError) {
+        console.error("❌ Error updating URLs:", urlError)
+        hasError = true
+      } else {
+        console.log("✅ URLs updated successfully")
+      }
+    }
+    
+    // 텍스트 설정들은 setting_key/setting_value로 저장
+    const textSettings = [
+      'site_title', 'site_description', 'contact_email', 'contact_phone',
+      'footer_text', 'footer_term', 'footer_privacy', 'footer_address',
+      'footer_phone', 'footer_email', 'footer_copyright'
+    ]
+    
+    for (const key of textSettings) {
+      if (key in settings) {
+        const value = settings[key as keyof SiteSettings]
+        console.log(`Saving text setting: ${key} =`, value)
+        
+        // 기존 레코드 확인
+        const { data: existing } = await supabase
+          .from("kmong_12_site_settings")
+          .select("*")
+          .eq("setting_key", key)
+          .single()
+        
+        if (existing) {
+          // UPDATE
+          const { error } = await supabase
+            .from("kmong_12_site_settings")
+            .update({
+              setting_value: value,
+              updated_at: new Date().toISOString()
+            })
+            .eq("setting_key", key)
+          
+          if (error) {
+            console.error(`❌ Error updating ${key}:`, error)
+            hasError = true
+          } else {
+            console.log(`✅ Updated ${key}`)
+          }
+        } else if (value) {
+          // INSERT (값이 있을 때만)
+          const { error } = await supabase
+            .from("kmong_12_site_settings")
+            .insert({
+              setting_key: key,
+              setting_value: value,
+              setting_type: 'text',
+              // URL 컬럼들도 기본값 설정 (모든 행에 동일)
+              ...urlUpdates
+            })
+          
+          if (error) {
+            console.error(`❌ Error inserting ${key}:`, error)
+            hasError = true
+          } else {
+            console.log(`✅ Inserted ${key}`)
+          }
+        }
+      }
     }
 
     setSaving(false)
-    alert("설정이 저장되었습니다!")
+    
+    if (hasError) {
+      alert("일부 설정 저장 중 오류가 발생했습니다. 콘솔을 확인해주세요.")
+    } else {
+      alert("설정이 저장되었습니다!")
+      console.log("🎉 All settings saved successfully!")
+      // 저장 후 데이터 다시 불러오기
+      console.log("🔄 Reloading settings after save...")
+      await fetchSettings()
+    }
   }
 
   const handleClearCache = async () => {
@@ -154,6 +334,70 @@ export default function SettingsPage() {
               onChange={(e) => setSettings({ ...settings, footer_text: e.target.value })}
               placeholder="© 2025 고구마팜. All rights reserved."
             />
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* 푸터 텍스트 관리 */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Settings className="w-5 h-5" />
+            푸터 텍스트 관리
+          </CardTitle>
+          <CardDescription>웹사이트 푸터에 표시되는 텍스트를 설정합니다</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <Label>이용약관 텍스트</Label>
+              <Input 
+                value={settings.footer_term || ""}
+                onChange={(e) => setSettings({ ...settings, footer_term: e.target.value })}
+                placeholder="이용약관"
+              />
+            </div>
+            <div>
+              <Label>개인정보처리방침 텍스트</Label>
+              <Input 
+                value={settings.footer_privacy || ""}
+                onChange={(e) => setSettings({ ...settings, footer_privacy: e.target.value })}
+                placeholder="개인정보 수집 및 이용방침"
+              />
+            </div>
+            <div>
+              <Label>회사 주소</Label>
+              <Input 
+                value={settings.footer_address || ""}
+                onChange={(e) => setSettings({ ...settings, footer_address: e.target.value })}
+                placeholder="서울특별시 강남구 선릉로 648"
+              />
+            </div>
+            <div>
+              <Label>대표 전화번호</Label>
+              <Input 
+                value={settings.footer_phone || ""}
+                onChange={(e) => setSettings({ ...settings, footer_phone: e.target.value })}
+                placeholder="070-7825-0749"
+              />
+            </div>
+            <div>
+              <Label>대표 이메일</Label>
+              <Input 
+                type="email"
+                value={settings.footer_email || ""}
+                onChange={(e) => setSettings({ ...settings, footer_email: e.target.value })}
+                placeholder="info@gogumafarm.kr"
+              />
+            </div>
+            <div>
+              <Label>저작권 표시</Label>
+              <Input 
+                value={settings.footer_copyright || ""}
+                onChange={(e) => setSettings({ ...settings, footer_copyright: e.target.value })}
+                placeholder="©2025. The SMC all rights reserved."
+              />
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -381,6 +625,30 @@ export default function SettingsPage() {
                 value={settings.instagram_url || "https://instagram.com"}
                 onChange={(e) => setSettings({ ...settings, instagram_url: e.target.value })}
                 placeholder="https://instagram.com/youraccount"
+              />
+            </div>
+            <div>
+              <Label>카카오톡 채널 URL</Label>
+              <Input 
+                value={settings.kakao_url || ""}
+                onChange={(e) => setSettings({ ...settings, kakao_url: e.target.value })}
+                placeholder="https://pf.kakao.com/_xYxYxY"
+              />
+            </div>
+            <div>
+              <Label>네이버 스토어 URL</Label>
+              <Input 
+                value={settings.naver_store_url || ""}
+                onChange={(e) => setSettings({ ...settings, naver_store_url: e.target.value })}
+                placeholder="https://smartstore.naver.com/yourstorename"
+              />
+            </div>
+            <div>
+              <Label>사업자정보확인 URL</Label>
+              <Input 
+                value={settings.business_info_url || ""}
+                onChange={(e) => setSettings({ ...settings, business_info_url: e.target.value })}
+                placeholder="https://www.ftc.go.kr/bizCommPop.do?wrkr_no=..."
               />
             </div>
           </div>

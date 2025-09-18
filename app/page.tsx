@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ChevronLeft, ChevronRight, Search, Menu, X } from "lucide-react"
+import { ChevronLeft, ChevronRight, Search, Menu, X, Instagram, Facebook, Youtube, MessageCircle, Store, FileText } from "lucide-react"
 import Link from "next/link"
 import { supabase } from "@/lib/supabase"
 import { trackPageView } from "@/lib/analytics"
@@ -109,11 +109,49 @@ export default function HomePage() {
       if (top10Data) {
         setTop10Items(top10Data)
       }
-      if (settingsData) {
-        const settings: any = {}
+      if (settingsData && settingsData.length > 0) {
+        console.log("🏠 Main page - Raw settings data from DB:", settingsData)
+        
+        // URL은 첫 번째 행에서 가져오기 (모든 행에 동일)
+        const firstRow = settingsData[0]
+        const settings: any = {
+          // URL 컬럼들
+          nav_link_1_url: firstRow.nav_link_1_url,
+          nav_link_2_url: firstRow.nav_link_2_url,
+          nav_link_3_url: firstRow.nav_link_3_url,
+          nav_link_4_url: firstRow.nav_link_4_url,
+          header_cta_1_url: firstRow.header_cta_1_url,
+          header_cta_2_url: firstRow.header_cta_2_url,
+          instagram_url: firstRow.instagram_url,
+          youtube_url: firstRow.youtube_url,
+          facebook_url: firstRow.facebook_url,
+          twitter_url: firstRow.twitter_url,
+          blog_url: firstRow.blog_url,
+          footer_privacy_url: firstRow.footer_privacy_url,
+          footer_terms_url: firstRow.footer_terms_url,
+          footer_contact_url: firstRow.footer_contact_url,
+          admin_panel_url: firstRow.admin_panel_url,
+          all_articles_url: firstRow.all_articles_url,
+          newsletter_signup_url: firstRow.newsletter_signup_url,
+          
+          // social_links 객체로 만들기
+          social_links: {
+            facebook: firstRow.facebook_url,
+            instagram: firstRow.instagram_url,
+            youtube: firstRow.youtube_url,
+            blog: firstRow.blog_url
+          }
+        }
+        
+        // 텍스트 설정들은 setting_key/setting_value에서 가져오기
         settingsData.forEach(item => {
-          settings[item.setting_key] = item.setting_value
+          if (item.setting_key && item.setting_value) {
+            settings[item.setting_key] = item.setting_value
+            console.log(`Main page - Loading: ${item.setting_key} =`, item.setting_value)
+          }
         })
+        
+        console.log("🏠 Main page - Final settings:", settings)
         setSiteSettings(settings)
       }
     } catch (error) {
@@ -687,16 +725,118 @@ export default function HomePage() {
               className="w-full h-full object-contain"
             />
           </motion.div>
+          
+          {/* Social Media Icons */}
+          <div className="flex justify-center gap-4 mb-6">
+            {siteSettings.instagram_url && (
+              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+                <Link 
+                  href={siteSettings.instagram_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-500 text-white rounded-full flex items-center justify-center hover:shadow-lg transition-all duration-300"
+                  title="Instagram"
+                >
+                  <Instagram className="w-6 h-6" />
+                </Link>
+              </motion.div>
+            )}
+            {siteSettings.social_links?.facebook && (
+              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+                <Link 
+                  href={siteSettings.social_links.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 hover:shadow-lg transition-all duration-300"
+                  title="Facebook"
+                >
+                  <Facebook className="w-6 h-6" />
+                </Link>
+              </motion.div>
+            )}
+            {siteSettings.social_links?.youtube && (
+              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+                <Link 
+                  href={siteSettings.social_links.youtube}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 bg-red-600 text-white rounded-full flex items-center justify-center hover:bg-red-700 hover:shadow-lg transition-all duration-300"
+                  title="YouTube"
+                >
+                  <Youtube className="w-6 h-6" />
+                </Link>
+              </motion.div>
+            )}
+            {siteSettings.kakao_url && (
+              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+                <Link 
+                  href={siteSettings.kakao_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 bg-yellow-400 text-black rounded-full flex items-center justify-center hover:bg-yellow-500 hover:shadow-lg transition-all duration-300"
+                  title="카카오톡 채널"
+                >
+                  <MessageCircle className="w-6 h-6" />
+                </Link>
+              </motion.div>
+            )}
+            {siteSettings.naver_store_url && (
+              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+                <Link 
+                  href={siteSettings.naver_store_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center hover:bg-green-600 hover:shadow-lg transition-all duration-300"
+                  title="네이버 스토어"
+                >
+                  <Store className="w-6 h-6" />
+                </Link>
+              </motion.div>
+            )}
+            {siteSettings.social_links?.blog && (
+              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+                <Link 
+                  href={siteSettings.social_links.blog}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 bg-gray-600 text-white rounded-full flex items-center justify-center hover:bg-gray-700 hover:shadow-lg transition-all duration-300"
+                  title="Blog"
+                >
+                  <FileText className="w-6 h-6" />
+                </Link>
+              </motion.div>
+            )}
+          </div>
         </div>
 
         {/* Footer Info */}
         <div className="bg-yellow-300 border-t border-yellow-400 py-4">
-          <div className="max-w-7xl mx-auto px-4 flex justify-between items-center text-sm">
+          <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-sm gap-4">
             <div className="flex gap-6">
-              <span>{siteSettings.footer_term || "이용약관"}</span>
-              <span>{siteSettings.footer_privacy || "개인정보 수집 및 이용방침"}</span>
+              <Link 
+                href={siteSettings.footer_terms_url || "/terms"}
+                className="hover:underline"
+              >
+                {siteSettings.footer_term || "이용약관"}
+              </Link>
+              <Link 
+                href={siteSettings.footer_privacy_url || "/privacy"}
+                className="hover:underline"
+              >
+                {siteSettings.footer_privacy || "개인정보 수집 및 이용방침"}
+              </Link>
+              {siteSettings.business_info_url && (
+                <Link 
+                  href={siteSettings.business_info_url}
+                  className="hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  사업자정보확인
+                </Link>
+              )}
             </div>
-            <div className="text-right">
+            <div className="text-center md:text-right">
               <div>
                 {siteSettings.footer_address || "서울특별시 강남구 선릉로 648"} · 
                 {siteSettings.footer_phone || "070-7825-0749"} · 
